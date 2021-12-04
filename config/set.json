@@ -1,0 +1,29 @@
+{
+    "db":{
+        "user": "root",
+        "pwd": "",
+        "host":"127.0.0.1",
+        "db":"gorm",
+        "port":3306
+    },
+    "tdk":{
+        "title":"goblog",
+        "keyword":"DAO list",
+        "description":"golang写的DAO文章系统",
+        "biean":"3",
+        "goan":"1",
+        "goanurl":"2",
+        "tonjiid":"bf02b970151cd2396c34a286097a2b82"
+    },
+    "con":{
+        "domain":"www.aaa.cn",
+        "baidutonjiid":""
+    },
+    "baidu":{
+        "url":"http://data.zz.baidu.com/urls?site=www.iq2.cn&token=*********",
+        "domain":"https://www.aaa.cn"
+        
+    },
+    "adminuri":"/login"
+
+}
