@@ -18,7 +18,7 @@ env: release
 tpl_path: 项目根目录的 view/*
 
 supervisord 配置
-[program:cardpro]
+[program:daobin]
 
 environment=GIN_MODE=release, CONF_PATH=/Users/osmen/work/DAOatlas/config
 command = /mnt/wwwroot/golang/bin/daobin
