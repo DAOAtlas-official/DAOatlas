@@ -89,7 +89,42 @@
                             v-if="arcdata.vedio_url!=''"> </video>
                     </div>
                 </div>
+                <!--  -->
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">
+                        <span class="c-red">*</span>文章场景：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input :disabled="isEdit" type="radio" id="base" :value="1" v-model="arcdata.scenes"> 普通文章
+                        <input :disabled="isEdit" type="radio" id="dao" :value="2" v-model="arcdata.scenes"> Dao文章
+                    </div>
+                </div>
 
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">
+                        标签：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <button type="button" v-for="(item,index) in tags"
+                            :class="select_tag.includes(`${item.id}#${item.name}`) ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                            @click='setTag(item)'>{{ item.name }}
+                        </button>
+                        <!-- <input type="text" class="input-text" v-model="arcdata.tag"> -->
+                    </div>
+                </div>
+
+                <div class="row cl" v-if="arcdata.scenes == 2">
+                    <label class="form-label col-xs-4 col-sm-2"></label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <div class="form-label col-sm-6" v-for="(item,index) in daoInputAttr">
+                            <div class="row cl">
+                                <label class="form-label col-xs-5 col-sm-3">
+                                    {{item.label}}：</label>
+                                <div class="formControls col-xs-7 col-sm-8">
+                                    <input type="text" class="input-text" placeholder="" v-model="daoAttr[item.key]">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">文章内容：</label>
@@ -99,7 +134,7 @@
                 </div>
                 <div class="row cl">
                     <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                        <button class="btn btn-primary " @click="tj()"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+                        <button class="btn btn-primary " @click="save()"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
 
                     </div>
                 </div>
@@ -271,20 +306,61 @@
                     isuser: 0,
                     type: 1,
                     arcdata: {
-                        //这里的字段后期要改一下，改成跟数据库一致就少处理几道了
+                        id: 0,
+                        scenes: 2,
+                        tag: '',
                         body: '',
-                        pic: '',//图片
+                        pic: '', // 图片
                         title: '',
                         typeid: 1,
                         tuijian: false,
                         swiper: false,
                     },
+                    daoInputAttr: [{key: 'how_to_join', label: 'how_to_join'},{key: 'discord', label: 'discord'},{key: 'wiki', label: 'wiki'},{key: 'twitter', label: 'twitter'},{key: 'website', label: 'website'},{key: 'forum', label: 'forum'},{key: 'voting', label: 'voting'},{key: 'AUM', label: 'AUM'},{key: 'treasury', label: 'treasury'},{key: 'token_holders', label: 'token_holders'},{key: 'token_link', label: 'token_link'},{key: 'token_name', label: 'token_name'},{key: 'key_contributors', label: 'key_contributors'}, {key: 'name', label: '名称'},{key: 'members', label: '成员'}],
+                    
+                    daoAttr: {
+                        pid: 0,
+                        start_time: 0,
+                        name: '',
+                        // image: '',
+                        members: '',
+                        key_contributors: '',
+                        token_name: '',
+                        token_link: '',
+                        token_holders: 0,
+                        treasury: '',
+                        AUM: 0,
+                        voting: '',
+                        forum: '',
+                        website: '',
+                        twitter: '',
+                        wiki: '',
+                        discord: '',
+                        how_to_join: ''
+                    },
                     types: [],
-                    uploadtype: 1
+                    uploadtype: 1,
+                    tags: [],
+                    select_tag: []
                 }
             },
-            methods: {
+            watch: {
+                'arcdata.scenes': function (newV, oldV) {
+                    this.getTag(newV)
+                }
+            },
+            computed: {
+                isEdit: function () {
+                    return this.arcdata.id != 0
+                }
+            },
 
+            methods: {
+                getTag(scenes) {
+                    $.get('/admin/tag?cate='+scenes, (resp)=>{
+                        this.tags = resp.data;
+                    })
+                },
                 up(type) {
                     this.uploadtype = type;
                     document.getElementById("selectfiles").click();
@@ -292,6 +368,16 @@
                 //设置素材分类
                 sztype(id) {
                     this.arcdata.typeid = id;
+                },
+                setTag(item) {
+                    const tag = `${item.id}#${item.name}`
+                    const indexOf = this.select_tag.indexOf(tag)
+                    if (this.select_tag.indexOf(tag) > -1) {
+                        this.select_tag.splice(indexOf, 1)
+                    } else {
+                        this.select_tag.push(tag)
+                    }
+                    console.log('设置tag', this.select_tag)
                 },
                 sztype1(id) {
                     console.log(id)
@@ -310,14 +396,21 @@
                     ue = UE.getEditor('editor');
                     ue.setContent(b);
                 },
-                tj() {
+                save() {
+                    const scenes = Number(this.arcdata.scenes)
+                    if (scenes == 2) {
+                        // 转数字型
+                        for (let attr of ['start_time','token_holders','AUM']) {
+                            this.daoAttr[attr] = Number(this.daoAttr[attr])
+                        }
+                    }
                     let that = this;
                     let b = UE.getEditor('editor').getContent()
                     let url = "/admin/addView";
                     if (getQueryVariable('type') == 'edit') {
                         url = "/admin/addView?type=edit";
                     }
-                    
+                    this.arcdata.tag = this.select_tag.join(',');
                     this.arcdata.tuijian = this.arcdata.tuijian ? 1 : 0;
                     this.arcdata.swiper = this.arcdata.swiper ? 1 : 0;
                     if(this.isuser==1||this.isuser==2){
@@ -330,17 +423,29 @@
 
                     this.arcdata.typeid = this.arcdata.typeid != 0 ? this.arcdata.typeid : this.types[0].id
                     console.log(this.arcdata);
-                    //return;
-                    $.post(url, that.arcdata, function (res) {
-                        if (res.code == 200) {
-                            layer.msg(res.msg);
-                            that.arcdata = [];
-                           // return
-                            setTimeout(function () { window.location.reload() }, 500);
-                        } else {
-                            layer.msg('更新失败')
+                    const param = {post_data: this.arcdata}
+                    if (scenes == 2) param.dao_attr = this.daoAttr;
+                    
+                    $.ajax({
+                        contentType: 'application/json',
+                        type: 'POST',
+                        url: url,
+                        dataType: 'json',
+                        data: JSON.stringify(param),
+                        success: (res) => {
+                            if (res.code == 200) {
+                                layer.msg(res.msg);
+                                console.log(res)
+                                this.arcdata = res.data.post_data;
+                                if (scenes == 2) {
+                                    this.daoAttr = res.data.dao_attr
+                                }
+                                // window.location.reload()
+                            } else {
+                                layer.msg('更新失败')
+                            }
                         }
-                    });
+                    })
                 },
             }
             ,
@@ -349,28 +454,33 @@
                 let tp = getQueryVariable('type')
                 if (tp == 'edit') {//如果是编辑
                     let id = getQueryVariable('id')
-                    if (id > 1) {
+                    console.log('编辑详情...', tp, typeof id)
+                    if (Number(id) > 0) {
                         $.get("/admin/view/" + id, function (res, status) {
                             if (status == 'success' && res.code == 200) {
-                                console.log(res.data);
+                                let post_data = res.data.post_data;
                                 ue = UE.getEditor('editor');
                                 ue.ready(function () {
                                     //设置编辑器的内容
-                                    let body = res.data.body
+                                    let body = post_data.body
                                     body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>");
                                     ue.setContent(body);
                                 });
                                 that.types = res.type
-                                res.data.tuijian = res.data.tuijian == 1 ? true : false
-                                res.data.swiper = res.data.swiper == 1 ? true : false
-                                delete res.data.tps
-                                delete res.data.content
-                                delete res.data.CreatedAt
-                                delete res.data.UpdatedAt
-                                delete res.data.DeletedAt
+                                post_data.tuijian = post_data.tuijian == 1 ? true : false
+                                post_data.swiper = post_data.swiper == 1 ? true : false
+                                delete post_data.tps
+                                delete post_data.content
+                                delete post_data.CreatedAt
+                                delete post_data.UpdatedAt
+                                delete post_data.DeletedAt
 
-                                that.arcdata = res.data;
-
+                                that.select_tag = post_data.tag.split(',')
+                                that.getTag(post_data.scenes)
+                                that.arcdata = post_data;
+                                if (post_data.scenes == 2) {
+                                    that.daoAttr = res.data.dao_attr
+                                }
                                 console.log(that.arcdata)
                             } else {
                                 layer.msg('异常')

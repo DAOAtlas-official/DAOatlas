@@ -64,7 +64,7 @@ func Auser(db *gorm.DB) bool {
 	if user.Id == 0 {
 		userNew := new(d.User)
 		userNew.Name = "dao-admin"
-		userNew.Pwd = util.Md5jiayan("77DsllAq") //md5加盐后加密一下
+		userNew.Pwd = util.Md5jiayan("123123") //md5加盐后加密一下
 		return db.Create(&userNew).Error == nil
 	} else {
 		fmt.Println("后台有用户")
