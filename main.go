@@ -68,5 +68,5 @@ func main() {
 		v1.POST("/edit/user", con.EditUserInfo)      //编辑个人简介
 	}
 
-	r.Run(":8080") //开启端口访问,本地再试一下提交
+	r.Run(":80") //开启端口访问,本地再试一下提交
 }

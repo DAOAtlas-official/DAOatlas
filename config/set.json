@@ -1,7 +1,7 @@
 {
     "db":{
-        "user": "debian-sys-maint",
-        "pwd": "X36pwVkmcWuLdjyh",
+        "user": "root",
+        "pwd": "",
         "host":"127.0.0.1",
         "db":"gorm",
         "port":3306
