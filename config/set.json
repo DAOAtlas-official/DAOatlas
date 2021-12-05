@@ -1,7 +1,7 @@
 {
     "db":{
         "user": "root",
-        "pwd": "root@Mysql",
+        "pwd": "",
         "host":"127.0.0.1",
         "db":"dao_collection",
         "port":3306
@@ -13,19 +13,19 @@
         "biean":"3",
         "goan":"1",
         "goanurl":"2",
-        "tonjiid":"bf02b970151cd2396c34a286097a2b82"
+        "tonjiid":"your_id"
     },
     "con":{
         "domain":"www.aaa.cn",
         "baidutonjiid":""
     },
     "baidu":{
-        "url":"http://data.zz.baidu.com/urls?site=www.iq2.cn&token=*********",
+        "url":"to_be_entered",
         "domain":"https://www.aaa.cn"
         
     },
     "adminuri":"/login",
-    "root_path": "/Users/osmen/work/DAOatlas",
+    "root_path": "/Users/jason/dev/new-DAOatlas",
     "env": "debug",
     "addr": ":8080"
 }
