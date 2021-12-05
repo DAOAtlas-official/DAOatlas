@@ -77,5 +77,6 @@ func main() {
 		// rest api DAO post
 	}
 
+	// r.Run(":80") //开启端口访问,本地再试一下提交
 	r.Run(cfg.GetString("addr")) //开启端口访问,本地再试一下提交
 }
