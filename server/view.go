@@ -16,7 +16,7 @@ func init() {
 
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
 func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
-	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
+	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 
 	num := 10 //一页默认10条

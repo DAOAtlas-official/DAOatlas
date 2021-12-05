@@ -22,26 +22,27 @@ import (
 func main() {
 	//先以正常模式运行，下面去掉为调试模式
 	//gin.SetMode(gin.ReleaseMode)
-	gin.SetMode("debug")
+	cfg := config.Configv
+	gin.SetMode(cfg.GetString("env")) // debug | release
 	r := gin.Default()
 	r.NoRoute(con.Not404)               //404页面
 	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
-
-	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
-	r.Static("/static", "static")   //引入静态目录
-	r.GET("/", con.Index)           //这个是首页，模板整整就可以啦
-	r.GET("/list/:id", con.NewList) //新列表页
-	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
-	r.GET("/search", con.NewList)   //搜索文章
-	r.GET("/about", con.About)      //关于我们
-	r.GET("/test", con.Test)        //搜索文章
+	rootPath := cfg.GetString("root_path")
+	r.LoadHTMLGlob(rootPath + "/view/*")   //这里是引入模板文件
+	r.Static("static", rootPath+"/static") //引入静态目录
+	r.GET("/", con.Index)                  //这个是首页，模板整整就可以啦
+	r.GET("/list/:id", con.NewList)        //新列表页
+	r.GET("/view/:id", con.GetView)        //文章详情页，这里的详情页可以开始获取数据了
+	r.GET("/search", con.NewList)          //搜索文章
+	r.GET("/about", con.About)             //关于我们
+	r.GET("/test", con.Test)               //搜索文章
 
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
 
 	v2 := r.Group("/admin")
 	{
-		cfg := config.Configv
+
 		v2.GET(cfg.GetString("adminuri"), con.Logins) //登陆页,修改配置文件,修改无效
 		v2.GET("/getcode", con.GetCode)               //获取验证码
 		v2.GET("/loginout", con.Loginout)             //退出登陆
@@ -66,7 +67,16 @@ func main() {
 		v1.POST("/edituser", con.EditUser)           //编辑用户信息
 		v1.GET("/edit/getuserinfo", con.GetUserInfo) //获取个人简介
 		v1.POST("/edit/user", con.EditUserInfo)      //编辑个人简介
+
+		// rest api 标签
+		v1.GET("/tag", con.GetTag)        // 获取文章tag
+		v1.DELETE("/tag/:id", con.DelTag) // 删除tag
+		v1.POST("/tag", con.AddTag)       // 添加tag
+		v1.PUT("/tag", con.AddTag)        // 更新tag
+
+		// rest api DAO post
 	}
 
-	r.Run(":80") //开启端口访问,本地再试一下提交
+	// r.Run(":80") //开启端口访问,本地再试一下提交
+	r.Run(cfg.GetString("addr")) //开启端口访问,本地再试一下提交
 }

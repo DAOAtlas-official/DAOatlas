@@ -1,9 +1,9 @@
 {
     "db":{
         "user": "root",
-        "pwd": "",
+        "pwd": "root@Mysql",
         "host":"127.0.0.1",
-        "db":"gorm",
+        "db":"dao_collection",
         "port":3306
     },
     "tdk":{
@@ -24,6 +24,8 @@
         "domain":"https://www.aaa.cn"
         
     },
-    "adminuri":"/login"
-
+    "adminuri":"/login",
+    "root_path": "/Users/osmen/work/DAOatlas",
+    "env": "debug",
+    "addr": ":8080"
 }

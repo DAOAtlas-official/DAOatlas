@@ -12,7 +12,6 @@ import (
 	"goblog/server"
 	"goblog/util"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,8 +25,15 @@ func AdminIndex(c *gin.Context) {
 func AdminGetId(c *gin.Context) {
 	id := c.Param("id")
 	view := util.GetView(id, 0)
+	data := map[string]interface{}{
+		"post_data": view,
+	}
+	if view.Scenes == d.DAO_POST {
+		daoAttr, _ := dao.GetDaoAttr(int64(view.ID))
+		data["dao_attr"] = daoAttr
+	}
 	tp := GetTypeNew("0")
-	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": view, "type": tp})
+	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": data, "type": tp})
 }
 
 //后台的文章的管理页面
@@ -50,21 +56,48 @@ func AdminAddView(c *gin.Context) {
 
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
 func AddView(c *gin.Context) {
-	var data d.View
+	var params struct {
+		PostData d.View    `json:"post_data"`
+		DaoAttr  d.DaoPost `json:"dao_attr"`
+	}
 	var err error
-	c.ShouldBind(&data)
+	c.ShouldBind(&params)
 
 	//typeid没办法直接拿过来，只好再单独获取了
-	typeid := c.PostForm("typeid")
-	t, _ := strconv.Atoi(typeid)
-	data.Typeid = t
+	data := params.PostData
+	// typeid := c.PostForm("typeid")
+	// t, _ := strconv.Atoi(typeid)
+	// data.Typeid = t
 	conn := dao.MDB
 	msg := "创建成功"
+	tx := conn.Begin()
 	if data.ID > 0 {
-		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
+		err = tx.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
+		if data.Scenes == d.DAO_POST {
+			err = tx.Model(&d.DaoPost{}).Where("pid = ?", data.ID).Updates(&params.DaoAttr).Error
+		}
+		if err != nil {
+			tx.Rollback()
+			c.JSON(200, gin.H{"msg": "更新失败", "code": 200})
+			return
+		}
+		tx.Commit()
 		msg = "更新成功"
+		// todo: 标签关联
 	} else {
-		err = conn.Create(&data).Error
+		err = tx.Create(&data).Error
+		params.PostData.ID = data.ID
+		if data.Scenes == d.DAO_POST {
+			daoAttr := params.DaoAttr
+			daoAttr.Pid = int64(data.ID)
+			err = tx.Create(&daoAttr).Error
+		}
+		if err != nil {
+			tx.Rollback()
+			c.JSON(200, gin.H{"msg": "创建失败", "code": 200})
+			return
+		}
+		tx.Commit()
 	}
 	if err != nil {
 		c.JSON(200, gin.H{"msg": "更新失败", "code": 200})
@@ -75,7 +108,7 @@ func AddView(c *gin.Context) {
 	util.BaiduLinksubmit(data.ID) //自动提交到百度收录
 	util.DelAll()                 //删除缓存
 	util.SetViewCache(&data)      //更新或者添加view都设置缓存
-	c.JSON(200, gin.H{"msg": msg, "code": 200})
+	c.JSON(200, gin.H{"msg": msg, "code": 200, "data": params})
 }
 
 //用户登陆提交的页面

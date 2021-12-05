@@ -10,6 +10,12 @@ import (
 	"gorm.io/gorm"
 )
 
+const (
+	_ = iota
+	BASE_POST
+	DAO_POST
+)
+
 //下面直接转过来不行
 type View struct {
 	ID        uint           `gorm:"primarykey"  json:"id" form:"id"`
@@ -27,7 +33,8 @@ type View struct {
 	Body      string         `gorm:"size:5000" json:"body" form:"body"`             //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
 	Typename  string         `gorm:"-" json:"typename" form:"typename"`
-	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
+	Scenes    uint8          `gorm:"scenes" json:"scenes" form:"scenes"` // 1: 普通文章 2: Dao 文章
+	Tag       string         `gorm:"tag" json:"tag" form:"tag"`          //  冗余存储Tag 主键`id#标签名` 逗号分割 12#Dao, 34#EOS
 }
 
 //评论
@@ -43,7 +50,8 @@ type ViewJson struct {
 	View
 	ID        uint `gorm:"primarykey" json:"id" form:"id"`
 	CreatedAt uint
-	Typeid    int    ` json:"typeid" form:"typeid"`     //分类的ID，关联
+	Typeid    int    ` json:"typeid" form:"typeid"` //分类的ID，关联
+	Scenes    uint8  ` json:"scenes" form:"scenes"`
 	Title     string ` json:"title" form:"title"`       //标题
 	Pic       string ` json:"pic" form:"pic"`           //文章的缩略图
 	Status    uint8  ` json:"status"`                   //文章状态，0删除，1正常
@@ -90,4 +98,54 @@ type User struct {
 	Age    int    `gorm:"size:2" json:"age" form:"age"`
 	Gender int    `gorm:"size:2" json:"gender" form:"gender"` //1:男、2:女
 	Pwd    string `gorm:"size:255" json:"pwd" form:"pwd"`
+}
+
+// 标签表
+type Tag struct {
+	ID       int    `gorm:"primary_key" json:"id" form:"id"`
+	Name     string `gorm:"column:name;" form:"name" json:"name"`               // 名称
+	Cate     uint8  `gorm:"column:cate;" form:"cate" json:"cate"`               // 标签所属文章类型
+	UseCount int    `gorm:"column:use_count" form:"use_count" json:"use_count"` // 标签使用数
+}
+
+func (t Tag) TableName() string {
+	return "tag"
+}
+
+// Dao 文章扩展表
+type DaoPost struct {
+	// ID      int64 `gorm:"column:id" json:"id"`
+	Pid             int64  `gorm:"pid" json:"pid"` // View 表关联id
+	StartTime       int64  `gorm:"start_time" json:"start_time"`
+	Name            string `gorm:"column:name" json:"name"`
+	Image           string `gorm:"column:image" json:"image"`
+	Members         string `gorm:"column:members" json:"members"`
+	KeyContributors string `gorm:"column:key_contributors" json:"key_contributors"`
+	TokenName       string `gorm:"column:token_name" json:"token_name"`
+	TokenLink       string `gorm:"column:token_link" json:"token_link"`
+	TokenHolders    int    `gorm:"column:token_holders" json:"token_holders"`
+	Treasury        string `gorm:"column:treasury" json:"treasury"`
+	AUM             int    `gorm:"column:AUM" json:"AUM"`
+	Voting          string `gorm:"column:voting" json:"voting"`
+	Forum           string `gorm:"column:forum" json:"forum"`
+	Website         string `gorm:"column:website" json:"website"`
+	Twitter         string `gorm:"column:twitter" json:"twitter"`
+	Discord         string `gorm:"column:discord" json:"discord"`
+	Wiki            string `gorm:"column:wiki" json:"wiki"`
+	HowToJoin       string `gorm:"column:how_to_join" json:"how_to_join"`
+}
+
+func (d DaoPost) TableName() string {
+	return "dao_post"
+}
+
+// 文章标签隐射表, 用于标签过滤文章
+type PostTag struct {
+	ID  int64 `gorm:"column:id" json:"id"`
+	Pid int64 `gorm:"column:pid" json:"pid"` // 关联View 表主键
+	Tid int64 `gorm:"column:tid" json:"tid"` // 关联Tag 表主键
+}
+
+func (d PostTag) TableName() string {
+	return "post_tag"
 }
