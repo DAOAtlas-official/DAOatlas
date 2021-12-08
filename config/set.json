@@ -25,7 +25,7 @@
         
     },
     "adminuri":"/login",
-    "root_path": "/Users/jason/dev/new-DAOatlas",
+    "root_path": "/Users/jason/dev/DAOatlas",
     "env": "debug",
     "addr": ":8080"
 }
