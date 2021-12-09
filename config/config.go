@@ -35,6 +35,7 @@ func init() {
 
 	_, confDir, _, _ = runtime.Caller(0)
 	confDir = path.Dir(confDir)
+	log.Println("Now config dir is:", confDir)
 	if confDir != "" {
 		log.Println("程序配置目录...", confDir)
 		Configv.AddConfigPath(confDir)
