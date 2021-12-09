@@ -70,7 +70,7 @@ CREATE TABLE `dao_post` (
   `how_to_join` varchar(255) DEFAULT NULL,
   UNIQUE KEY `pid_UNIQUE` (`pid`),
   KEY `pid_index_dao` (`pid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,7 +79,7 @@ CREATE TABLE `dao_post` (
 
 LOCK TABLES `dao_post` WRITE;
 /*!40000 ALTER TABLE `dao_post` DISABLE KEYS */;
-INSERT INTO `dao_post` VALUES (3,0,'EOS','','jeck','jskdj','EOS','eos1',56,'',34,'voting','','website','https://www.weitter.com','','wiki','huobi'),(4,0,'阿道夫','','阿道夫','42423223','阿道夫','2323',2,'2323',1,'阿道夫','阿道夫','','阿道夫','阿道夫','阿道夫','阿斯蒂芬');
+INSERT INTO `dao_post` VALUES (3,0,'EOS','','jeck','jskdj','EOS','eos1',56,'',34,'voting','','website','https://www.weitter.com','','wiki','huobi'),(4,0,'阿道夫','','阿道夫','42423223','阿道夫','2323',2,'2323',1,'阿道夫','阿道夫','','阿道夫','阿道夫','阿道夫','阿斯蒂芬'),(5,0,'阿道夫','','闪电贷','阿道夫 ','盛世嫡妃','啊',39,'速达非',22,'安抚安德','点对点','阿道夫','阿萨德','阿萨德','阿斯蒂芬','阿斯蒂芬');
 /*!40000 ALTER TABLE `dao_post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `post_tag` (
   `tid` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tid_index` (`tid`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='文章标签隐射表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='文章标签隐射表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `tag` (
   `cate` tinyint NOT NULL,
   `use_count` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `views` (
   PRIMARY KEY (`id`),
   KEY `idx_views_deleted_at` (`deleted_at`),
   KEY `scenes_index_view` (`scenes`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +247,7 @@ CREATE TABLE `views` (
 
 LOCK TABLES `views` WRITE;
 /*!40000 ALTER TABLE `views` DISABLE KEYS */;
-INSERT INTO `views` VALUES (1,1638620394,1638620394,NULL,1,'欢迎使用DAO list ',0,0,0,'',1,'欢迎使用DAO list','欢迎使用DAO list',1,NULL),(2,1638635584,1638635764,NULL,1,'标题党哈哈哈',0,1,0,'',1,'就是快递费积分电风扇','<p>就是快递费积分电风扇</p>',1,'Dao,EOS'),(3,1638636041,1638688296,NULL,1,'Dao 文章标题',0,1,0,'',1,'haohshdj 安徽省到付件','<p>haohshdj 安徽省到付件</p>',2,'10#ETH'),(4,1638702537,1638702596,NULL,2,'我的dao',0,0,0,'/static/upload/images/20211205/1638702450543.png',1,'打发打发看开始开始打发第三方','<p>打发打发看开始开始<mip-img src=\"/static/upload/images/20211205/1638702450543.png\"></mip-img></p><p>打发第三方</p>',2,'');
+INSERT INTO `views` VALUES (1,1638620394,1638620394,NULL,1,'欢迎使用DAO list ',0,0,0,'',1,'欢迎使用DAO list','欢迎使用DAO list',1,NULL),(2,1638635584,1638635764,NULL,1,'标题党哈哈哈',0,1,0,'',1,'就是快递费积分电风扇','<p>就是快递费积分电风扇</p>',1,'Dao,EOS'),(3,1638636041,1638688296,NULL,1,'Dao 文章标题',0,1,0,'',1,'haohshdj 安徽省到付件','<p>haohshdj 安徽省到付件</p>',2,'10#ETH'),(4,1638702537,1638702596,NULL,2,'我的dao',0,0,0,'/static/upload/images/20211205/1638702450543.png',1,'打发打发看开始开始打发第三方','<p>打发打发看开始开始<mip-img src=\"/static/upload/images/20211205/1638702450543.png\"></mip-img></p><p>打发第三方</p>',2,''),(5,1639025961,1639025974,NULL,2,'12-9 test again我的测试',0,1,0,'/static/upload/images/20211209/1639025914834.png',1,'阿斯顿发的发的发的','<p><br/></p><p>阿斯顿发的发的发的</p><p><mip-img src=\"/static/upload/images/20211209/1639025914834.png\"></mip-img></p>',2,'');
 /*!40000 ALTER TABLE `views` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -260,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-08 21:46:26
+-- Dump completed on 2021-12-09 13:01:55
