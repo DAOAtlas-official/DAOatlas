@@ -1,3 +1,3 @@
-rm config/set.json
-cp -a set-server-bak.json set.json
+rm ./config/set.json
+cp -a ./config/set-server-bak.json ./set.json
 
