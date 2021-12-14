@@ -1,3 +1,5 @@
+-- CREATE DATABASE `dao_collection` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
 -- MySQL dump 10.13  Distrib 8.0.27, for macos11 (x86_64)
 --
 -- Host: 127.0.0.1    Database: dao_collection
@@ -30,7 +32,7 @@ CREATE TABLE `configs` (
   `value` varchar(500) DEFAULT NULL,
   `group` tinyint unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,11 +82,11 @@ CREATE TABLE `dao_post` (
 -- Dumping data for table `dao_post`
 --
 
-LOCK TABLES `dao_post` WRITE;
-/*!40000 ALTER TABLE `dao_post` DISABLE KEYS */;
-INSERT INTO `dao_post` VALUES (3,0,'EOS','','jeck','jskdj','EOS','eos1',56,'',34,'voting','','website','https://www.weitter.com','','wiki','huobi'),(4,0,'阿道夫','','阿道夫','42423223','阿道夫','2323',2,'2323',1,'阿道夫','阿道夫','','阿道夫','阿道夫','阿道夫','阿斯蒂芬'),(5,0,'阿道夫','','闪电贷','阿道夫 ','盛世嫡妃','啊',39,'速达非',22,'安抚安德','点对点','阿道夫','阿萨德','阿萨德','阿斯蒂芬','阿斯蒂芬');
-/*!40000 ALTER TABLE `dao_post` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `dao_post` WRITE;
+-- /*!40000 ALTER TABLE `dao_post` DISABLE KEYS */;
+-- INSERT INTO `dao_post` VALUES (3,0,'EOS','','jeck','jskdj','EOS','eos1',56,'',34,'voting','','website','https://www.weitter.com','','wiki','huobi'),(4,0,'阿道夫','','阿道夫','42423223','阿道夫','2323',2,'2323',1,'阿道夫','阿道夫','','阿道夫','阿道夫','阿道夫','阿斯蒂芬'),(5,0,'阿道夫','','闪电贷','阿道夫 ','盛世嫡妃','啊',39,'速达非',22,'安抚安德','点对点','阿道夫','阿萨德','阿萨德','阿斯蒂芬','阿斯蒂芬');
+-- /*!40000 ALTER TABLE `dao_post` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `links`
@@ -98,7 +100,7 @@ CREATE TABLE `links` (
   `url` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +177,7 @@ CREATE TABLE `tps` (
   `info` varchar(255) DEFAULT NULL,
   `status` varchar(1) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -202,7 +204,7 @@ CREATE TABLE `users` (
   `gender` tinyint DEFAULT NULL,
   `pwd` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +243,7 @@ CREATE TABLE `views` (
   PRIMARY KEY (`id`),
   KEY `idx_views_deleted_at` (`deleted_at`),
   KEY `scenes_index_view` (`scenes`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
