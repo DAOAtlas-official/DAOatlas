@@ -10,7 +10,7 @@ import (
 	"goblog/config"
 	con "goblog/controller"
 
-	"goblog/install"
+	// "goblog/install"
 	"goblog/middleware"
 	"goblog/util"
 
@@ -26,7 +26,7 @@ func main() {
 	gin.SetMode(cfg.GetString("env")) // debug | release
 	r := gin.Default()
 	r.NoRoute(con.Not404)               //404页面
-	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
+	// r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
 	rootPath := cfg.GetString("root_path")
 	r.LoadHTMLGlob(rootPath + "/view/*")   //这里是引入模板文件
 	r.Static("static", rootPath+"/static") //引入静态目录
