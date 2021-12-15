@@ -24,7 +24,7 @@
         "domain":"https://www.aaa.cn"
         
     },
-    "adminuri":"/login",
+    "adminuri":"/admin/login",
     "root_path": "/Users/jason/dev/DAOatlas",
     "env": "debug",
     "addr": ":8080"
