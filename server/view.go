@@ -36,6 +36,8 @@ func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 		JoinDao.Limit(num).Offset(page * num).Order("click desc").Find(&vi)
 	case "-4":
 		JoinDao.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
+	case "-5":
+		JoinDao.Where("tuijian = ?", 1).Limit(1).Order(order).Find(&vi)		
 	default:
 
 		JoinDao.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Find(&vi)
@@ -46,6 +48,17 @@ func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 
 //获取当前分类下面的10条文章
 func Findlist2(id string) (vi []model.ViewJson) {
+	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
+	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	if id != "0" {
+		JoinDao = JoinDao.Where("typeid = ?", id)
+	}
+	JoinDao.Limit(10).Order("created_at desc").Find(&vi)
+	return
+}
+
+//获取当前分类下面的10条文章
+func Findlist3(id string) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if id != "0" {
@@ -104,8 +117,9 @@ func Getinfo() (baseinfo model.BaseInfo, err error) {
 	err = util.GetCache(util.BaseCache, &baseinfo)
 	if err != nil {
 		//fmt.Println("没有缓存")
-		baseinfo.New = util.Imgsrc(GetViewlist("0", 1))      //最新
+		baseinfo.New = util.Imgsrc(GetViewlist("-5", 1))      //最新
 		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
+		// baseinfo.Tuijian = util.Imgsrc(GetViewlist("-5", 1)) //推荐
 		baseinfo.Tdk = config.GetTDK()
 		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
 		util.SetCache(util.BaseCache, &baseinfo)

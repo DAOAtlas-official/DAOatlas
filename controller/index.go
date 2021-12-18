@@ -146,6 +146,15 @@ func Index(c *gin.Context) {
 		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
 		tnew = append(tnew, v)
 	}
+
+
+	//每个分类的循环获取前3条
+	tnew3 := []d.Tp{}
+	for _, v := range baseinfo.Typeinfo {
+		v.Views = server.Findlist3(strconv.Itoa(int(v.ID)))
+		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
+		tnew3 = append(tnew3, v)
+	}	
 	//fmt.Printf("转换后的数据%+v", tnew)
 	//友情链接
 	var link []d.Link
@@ -154,6 +163,7 @@ func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"base":   baseinfo, //基础信息,可替换上面四条
 		"tt":     tnew,
+		"tt3":     tnew3,
 		"remen":  util.Imgsrc(remen),
 		"swiper": util.Imgsrc(swiper),
 		"link":   link,
