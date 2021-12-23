@@ -1,0 +1,24 @@
+
+/*home*/
+.header {background-color: #fff;}
+.nav .nav-item .active {border-bottom: 2px solid #000;}
+.read-more {border:solid 1px #ddd; border-radius:30px; color: #000;}
+.dao-list,.footer,.page {background-color: #F1F6F4;;padding:3rem 0;}
+.dao-btn {color: #000;padding:0.6rem 1rem;margin: 0.5rem}
+.dao-btn-primary {background-color: #52DE94;}
+.dao-btn-secondary {background-color: #D4E9DE;}
+.dao-btn:hover {background-color: #48C382;}
+.dao-btn .nub {font-size: 12px}
+.news-card-1 {background-image: url( /imgs/bg-news-1.jpg);background-repeat: no-repeat;}
+.news-card-2 {background-image: url( /imgs/bg-news-2.jpg);background-repeat: no-repeat;}
+.dao-card {border-radius:6px; background-color: #fff;padding: 1rem;height: 420px;}
+.cl {clear:both; }
+.f12 {font-size: 12px;}
+.fl {float: left;}
+.bg-more {background-color: #52DE94}
+.bg-more:hover {background-color:#48C382;color: #fff;}
+.color-primary {color: #52DE94;}
+/*list & page*/
+.bg {background-color: #F1F6F4;}
+.mr-1 {margin-right: 1rem}
+                        
