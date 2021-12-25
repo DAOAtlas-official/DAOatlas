@@ -15,11 +15,12 @@ func init() {
 } */
 
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
-func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
+func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
-
-	num := 10 //一页默认10条
+	if limit == 0 {
+		limit = 10 //一页默认10条
+	}
 	if page < 1 {
 		page = 1
 	}
@@ -27,20 +28,20 @@ func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 	order := "created_at desc"
 	switch id {
 	case "0":
-		JoinDao.Limit(num).Offset(page * num).Order(order).Find(&vi)
+		JoinDao.Limit(limit).Offset(page * limit).Order(order).Find(&vi)
 	case "-1":
-		JoinDao.Where("tuijian = ?", 1).Limit(num).Order(order).Find(&vi)
+		JoinDao.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	case "-2":
-		JoinDao.Where("swiper = ?", 1).Limit(num / 2).Order(order).Find(&vi)
+		JoinDao.Where("swiper = ?", 1).Limit(limit / 2).Order(order).Find(&vi)
 	case "-3":
-		JoinDao.Limit(num).Offset(page * num).Order("click desc").Find(&vi)
+		JoinDao.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
 	case "-4":
 		JoinDao.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
 	case "-5":
-		JoinDao.Where("tuijian = ?", 1).Limit(1).Order(order).Find(&vi)		
+		JoinDao.Where("tuijian = ?", 1).Limit(1).Order(order).Find(&vi)
 	default:
 
-		JoinDao.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Find(&vi)
+		JoinDao.Where("typeid = ?", id).Limit(limit).Offset(page * limit).Order(order).Find(&vi)
 		//fmt.Printf("123%+v", &vi)
 	}
 	return
@@ -117,8 +118,8 @@ func Getinfo() (baseinfo model.BaseInfo, err error) {
 	err = util.GetCache(util.BaseCache, &baseinfo)
 	if err != nil {
 		//fmt.Println("没有缓存")
-		baseinfo.New = util.Imgsrc(GetViewlist("-5", 1))      //最新
-		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
+		// baseinfo.New = util.Imgsrc(GetViewlist("-5", 1))      //最新
+		// baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
 		// baseinfo.Tuijian = util.Imgsrc(GetViewlist("-5", 1)) //推荐
 		baseinfo.Tdk = config.GetTDK()
 		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息

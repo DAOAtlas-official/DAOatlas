@@ -11,10 +11,12 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
+	"sync"
 	"time"
 
 	"goblog/config"
 	"goblog/dao"
+	"goblog/model"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
@@ -70,7 +72,7 @@ func About(c *gin.Context) {
 	})
 }
 
-//关联查询测试用
+// 关联查询测试用 Todo: 静态文件通过nginx反向代理
 func Not404(c *gin.Context) {
 	tp := GetTypeNew("0") //栏目分类
 	c.HTML(http.StatusNotFound, "404.html", gin.H{
@@ -128,45 +130,72 @@ func NewList(c *gin.Context) {
 	})
 }
 
-//这里是首页
+// Index 首页
 func Index(c *gin.Context) {
-	remen := server.GetViewlist("-3", 1)  //热门
-	swiper := server.GetViewlist("-2", 1) //轮播
+	var wg sync.WaitGroup
+	var hotPosts []model.ViewJson
+	var newPosts []model.ViewJson
+	var recommendPosts []model.ViewJson
+	var tags []model.Tag // 标签数据
+	// 热门
+	wg.Add(4)
+	go func() {
+		hotPosts = server.GetViewlist("-3", 1, 3)
+		wg.Done()
+	}()
+	// 最新
+	go func() {
+		newPosts = util.Imgsrc(server.GetViewlist("-5", 1, 3)) //最新
+		wg.Done()
+	}()
+	// 标签
+	go func() {
+		tags, _ = dao.GetTags(0, 15)
+		wg.Done()
+	}()
 
-	baseinfo, err := server.Getinfo()
-	if err != nil {
-		server.Fail(c)
-		return
-	}
+	// 推荐
+	go func() {
+		recommendPosts = util.Imgsrc(server.GetViewlist("-4", 1, 15)) //推荐
+		wg.Done()
+	}()
+
+	wg.Wait()
+	baseinfo, _ := server.Getinfo()
+	// if err != nil {
+	// 	server.Fail(c)
+	// 	return
+	// }
 
 	//每个分类的循环获取
-	tnew := []d.Tp{}
-	for _, v := range baseinfo.Typeinfo {
-		v.Views = server.Findlist2(strconv.Itoa(int(v.ID)))
-		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
-		tnew = append(tnew, v)
-	}
-
+	// tnew := []d.Tp{}
+	// for _, v := range baseinfo.Typeinfo {
+	// 	v.Views = server.Findlist2(strconv.Itoa(int(v.ID)))
+	// 	v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
+	// 	tnew = append(tnew, v)
+	// }
 
 	//每个分类的循环获取前3条
-	tnew3 := []d.Tp{}
-	for _, v := range baseinfo.Typeinfo {
-		v.Views = server.Findlist3(strconv.Itoa(int(v.ID)))
-		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
-		tnew3 = append(tnew3, v)
-	}	
+	// tnew3 := []d.Tp{}
+	// for _, v := range baseinfo.Typeinfo {
+	// 	v.Views = server.Findlist3(strconv.Itoa(int(v.ID)))
+	// 	v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
+	// 	tnew3 = append(tnew3, v)
+	// }
 	//fmt.Printf("转换后的数据%+v", tnew)
 	//友情链接
-	var link []d.Link
-	dao.MDB.Find(&link)
+	// var link []d.Link
+	// dao.MDB.Find(&link)
 	//fmt.Printf("link%+v", link)
+
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"base":   baseinfo, //基础信息,可替换上面四条
-		"tt":     tnew,
-		"tt3":     tnew3,
-		"remen":  util.Imgsrc(remen),
-		"swiper": util.Imgsrc(swiper),
-		"link":   link,
+		"tab":            "home",
+		"base":           baseinfo, //基础信息,可替换上面四条
+		"tags":           tags,
+		"newPosts":       newPosts,
+		"hotPosts":       hotPosts,
+		"recommendPosts": recommendPosts,
+		// "link":   link,
 	})
 }
 

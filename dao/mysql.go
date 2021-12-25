@@ -32,6 +32,12 @@ func init() {
 		log.Fatal("connect MDB failed:", err.Error())
 		return
 	}
+
+	if con.GetString("env") == "debug" {
+		log.Println("Mysql Debug...")
+		MDB = MDB.Debug()
+	}
+
 	sqlDB, _ := MDB.DB()
 	// 设置最大连接数
 	sqlDB.SetMaxOpenConns(100) //最大连接数
