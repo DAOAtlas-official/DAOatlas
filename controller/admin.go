@@ -8,10 +8,13 @@ package controller
 import (
 	"fmt"
 	"goblog/dao"
+	"goblog/model"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
 	"net/http"
+	"strconv"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -54,6 +57,25 @@ func AdminAddView(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin_addview.html", gin.H{}) //进入管理首页
 }
 
+func formatTags(pid int64, tagStr string) []model.PostTag {
+	tags := strings.Split(tagStr, ",")
+	// 删除之前的关联
+	tagsM := make([]model.PostTag, 0)
+	for _, tag := range tags {
+		if tag == "" {
+			continue
+		}
+		tagFlag := strings.Split(tag, "#")
+
+		tagID, _ := strconv.ParseInt(tagFlag[0], 10, 32)
+		tagsM = append(tagsM, model.PostTag{
+			Tid: tagID,
+			Pid: pid,
+		})
+	}
+	return tagsM
+}
+
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
 func AddView(c *gin.Context) {
 	var params struct {
@@ -83,6 +105,12 @@ func AddView(c *gin.Context) {
 		}
 		tx.Commit()
 		msg = "更新成功"
+		if params.PostData.Tag != "" {
+			// 删除之前的关联
+			tagsM := formatTags(int64(params.PostData.ID), params.PostData.Tag)
+			dao.UnLinkPostTag(int64(params.PostData.ID))
+			dao.LinkPostTag(int64(params.PostData.ID), tagsM)
+		}
 		// todo: 标签关联
 	} else {
 		err = tx.Create(&data).Error
@@ -97,7 +125,12 @@ func AddView(c *gin.Context) {
 			c.JSON(200, gin.H{"msg": "创建失败", "code": 200})
 			return
 		}
+		// todo: 标签关联
 		tx.Commit()
+		if params.PostData.Tag != "" {
+			tagsM := formatTags(int64(data.ID), params.PostData.Tag)
+			dao.LinkPostTag(int64(data.ID), tagsM)
+		}
 	}
 	if err != nil {
 		c.JSON(200, gin.H{"msg": "更新失败", "code": 200})

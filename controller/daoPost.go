@@ -16,6 +16,8 @@ func DaosPageList(c *gin.Context) {
 	var tags []model.Tag // 标签数据
 	var daoPosts []dao.DaoPostItem
 	page := c.Query("page")
+	tagID := c.Query("tid")
+	limit := 15
 	if page == "" {
 		page = "1"
 	}
@@ -32,7 +34,13 @@ func DaosPageList(c *gin.Context) {
 		where := map[string]interface{}{
 			"status = ?": 1,
 		}
-		daoPosts, _ = dao.GetDaoPostList(int(pageNum), 15, where, "")
+		if tagID == "" {
+			daoPosts, _ = dao.GetDaoPostList(int(pageNum), limit, where, "")
+		} else {
+			tid, _ := strconv.ParseInt(tagID, 10, 32)
+			daoPosts, _ = dao.GetPostsByTagID(tid, int(pageNum), limit)
+		}
+
 		wg.Done()
 	}()
 	wg.Wait()
@@ -41,6 +49,7 @@ func DaosPageList(c *gin.Context) {
 
 	c.HTML(http.StatusOK, "daosPage.html", gin.H{
 		"tab":      "daoPost",
+		"tid":      tagID,
 		"page":     pageNum + 2,
 		"base":     baseinfo,
 		"tags":     tags,

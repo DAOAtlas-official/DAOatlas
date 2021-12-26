@@ -18,7 +18,7 @@
     <div class="dao-list mt-5">
         <div class="container">
             {{range $i, $v := .tags}}
-            <a href="#" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
+            <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
             {{end}}
         </div>
         <div class="cl"></div>
@@ -43,7 +43,7 @@
                 {{end}}
             </div>
         </div>
-        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage?page={{.page}}">See More...</a></div>
+        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">See More...</a></div>
     </div>
     <div class="footer">
         <h3 class="text-center mb-4">Join the community</h3>

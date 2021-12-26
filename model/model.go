@@ -116,22 +116,24 @@ func (t Tag) TableName() string {
 type DaoPost struct {
 	// ID      int64 `gorm:"column:id" json:"id"`
 	Pid             int64  `gorm:"pid" json:"pid"` // View 表关联id
-	StartTime       int64  `gorm:"start_time" json:"start_time"`
+	StartTime       string `gorm:"start_time" json:"start_time"`
 	Name            string `gorm:"column:name" json:"name"`
 	Image           string `gorm:"column:image" json:"image"`
 	Members         string `gorm:"column:members" json:"members"`
 	KeyContributors string `gorm:"column:key_contributors" json:"key_contributors"`
 	TokenName       string `gorm:"column:token_name" json:"token_name"`
 	TokenLink       string `gorm:"column:token_link" json:"token_link"`
-	TokenHolders    int    `gorm:"column:token_holders" json:"token_holders"`
+	TokenHolders    string `gorm:"column:token_holders" json:"token_holders"`
 	Treasury        string `gorm:"column:treasury" json:"treasury"`
-	AUM             int    `gorm:"column:AUM" json:"AUM"`
+	AUM             string `gorm:"column:AUM" json:"AUM"`
 	Voting          string `gorm:"column:voting" json:"voting"`
 	Forum           string `gorm:"column:forum" json:"forum"`
 	Website         string `gorm:"column:website" json:"website"`
 	Twitter         string `gorm:"column:twitter" json:"twitter"`
 	Discord         string `gorm:"column:discord" json:"discord"`
 	Wiki            string `gorm:"column:wiki" json:"wiki"`
+	Activities      string `gorm:"column:activities" json:"activities"`
+	Summary         string `gorm:"column:summary" json:"summary"`
 	HowToJoin       string `gorm:"column:how_to_join" json:"how_to_join"`
 }
 

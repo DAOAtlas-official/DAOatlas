@@ -46,7 +46,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <a href="#" class="read-more px-2 py-1 f12 text-decoration-none">Read more</a>
+                    <a href="/articles" class="read-more px-2 py-1 f12 text-decoration-none">Read more</a>
                 </div>
             </div>
             <div class="col-md-6 px-5">
@@ -72,7 +72,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <a href="#" class="read-more px-2 py-1 text-decoration-none f12">Read more</a>
+                    <a href="/daosPage" class="read-more px-2 py-1 text-decoration-none f12">Read more</a>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
     <div class="dao-list mt-5">
         <div class="container">
             {{range $i, $v := .tags}}
-            <a href="#" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
+            <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
             {{end}}
              </div>
         <div class="cl"></div>
@@ -106,7 +106,7 @@
                 {{end}}
             </div>
         </div>
-        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="">See More...</a></div>
+        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage">See More...</a></div>
     </div>
     <div class="footer">
         <h3 class="text-center mb-4">Join the community</h3>

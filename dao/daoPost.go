@@ -2,6 +2,7 @@ package dao
 
 import (
 	"goblog/model"
+	"strings"
 	"sync"
 )
 
@@ -56,6 +57,41 @@ func GetTags(cate uint8, limit int) (tags []model.Tag, err error) {
 		err = MDB.Where("cate = ?", cate).Limit(limit).Find(&tags).Error
 	} else {
 		err = MDB.Limit(limit).Find(&tags).Error
+	}
+	return
+}
+
+// LinkPostTag 关联post tag
+func LinkPostTag(pid int64, tags []model.PostTag) error {
+	arguments := make([]string, len(tags))
+	params := make([]interface{}, len(tags)*2)
+	for j, tag := range tags {
+		arguments[j] = "(?,?)"
+		i := j * 2
+		params[i] = tag.Pid
+		params[i+1] = tag.Tid
+	}
+	err := MDB.Exec(`INSERT post_tag(pid, tid) values `+strings.Join(arguments, ","), params...).Error
+	return err
+}
+
+func UnLinkPostTag(pid int64) error {
+	return MDB.Where("pid = ?", pid).Delete(model.PostTag{}).Error
+}
+
+// 根据标签id 获取文章
+func GetPostsByTagID(tid int64, page int, limit int) (daoList []DaoPostItem, err error) {
+	var postTags []model.PostTag
+	MDB.Where("tid = ?", tid).Limit(limit).Offset(page * limit).Find(&postTags)
+	if len(postTags) > 0 {
+		pids := make([]int64, 0, len(postTags))
+		for i, _ := range postTags {
+			pids = append(pids, postTags[i].Pid)
+		}
+		where := map[string]interface{}{
+			"views.id in (?)": pids,
+		}
+		daoList, err = GetDaoPostList(page, limit, where, "")
 	}
 	return
 }
