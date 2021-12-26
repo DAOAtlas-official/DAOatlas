@@ -46,3 +46,13 @@ func Events(c *gin.Context) {
 	articleList(c, "events", "events.html", page, where)
 	return
 }
+
+func DaoJobs(c *gin.Context) {
+	page := c.Query("page")
+
+	where := map[string]interface{}{
+		"status = ?": 1,
+	}
+	articleList(c, "jobs", "jobs.html", page, where)
+	return
+}

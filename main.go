@@ -39,6 +39,7 @@ func main() {
 	r.GET("/daosPage", con.DaosPageList)
 	r.GET("/articles", con.Article)
 	r.GET("/events", con.Events)
+	r.GET("/jobs", con.DaoJobs)
 
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
