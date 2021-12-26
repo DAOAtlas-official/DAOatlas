@@ -40,11 +40,26 @@ func GetView(c *gin.Context) {
 		server.Fail(c)
 		return
 	}
-	//fmt.Printf("wyth%+v", baseinfo)
-	c.HTML(http.StatusOK, "view.html", gin.H{
+	body := template.HTML(vvv.Body)
+	c.HTML(http.StatusOK, "articlesDetail.html", gin.H{
 		"view": vvv,
-		"body": template.HTML(vvv.Body),
+		"body": body,
 		"base": baseinfo,
+	})
+}
+
+// Todo: 获取到 post 详情
+func GetDaoPost(c *gin.Context) {
+	pid, _ := strconv.Atoi(c.Param("id"))
+	post, daoAttr, _ := dao.GetDaoPostDetail(int64(pid))
+
+	body := template.HTML(post.Body)
+	baseinfo, _ := server.Getinfo()
+	c.HTML(http.StatusOK, "articlesDetail.html", gin.H{
+		"post":    post,
+		"daoAttr": daoAttr,
+		"body":    body,
+		"base":    baseinfo,
 	})
 }
 
@@ -162,31 +177,6 @@ func Index(c *gin.Context) {
 
 	wg.Wait()
 	baseinfo, _ := server.Getinfo()
-	// if err != nil {
-	// 	server.Fail(c)
-	// 	return
-	// }
-
-	//每个分类的循环获取
-	// tnew := []d.Tp{}
-	// for _, v := range baseinfo.Typeinfo {
-	// 	v.Views = server.Findlist2(strconv.Itoa(int(v.ID)))
-	// 	v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
-	// 	tnew = append(tnew, v)
-	// }
-
-	//每个分类的循环获取前3条
-	// tnew3 := []d.Tp{}
-	// for _, v := range baseinfo.Typeinfo {
-	// 	v.Views = server.Findlist3(strconv.Itoa(int(v.ID)))
-	// 	v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
-	// 	tnew3 = append(tnew3, v)
-	// }
-	//fmt.Printf("转换后的数据%+v", tnew)
-	//友情链接
-	// var link []d.Link
-	// dao.MDB.Find(&link)
-	//fmt.Printf("link%+v", link)
 
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"tab":            "home",
@@ -195,7 +185,6 @@ func Index(c *gin.Context) {
 		"newPosts":       newPosts,
 		"hotPosts":       hotPosts,
 		"recommendPosts": recommendPosts,
-		// "link":   link,
 	})
 }
 

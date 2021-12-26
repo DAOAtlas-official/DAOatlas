@@ -19,7 +19,7 @@
         
         {{range $i, $v := .articleList}}
         <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
-            <h4 class="mb-4">{{$v.Title}}</h4>
+            <h4 class="mb-4"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></h4>
             <div class="row">
                 <div class="col-md-8">
                     <p>{{$v.Content}}</p>

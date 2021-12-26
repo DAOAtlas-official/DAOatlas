@@ -79,7 +79,7 @@ func UnLinkPostTag(pid int64) error {
 	return MDB.Where("pid = ?", pid).Delete(model.PostTag{}).Error
 }
 
-// 根据标签id 获取文章
+// 根据标签id 获取文章列表
 func GetPostsByTagID(tid int64, page int, limit int) (daoList []DaoPostItem, err error) {
 	var postTags []model.PostTag
 	MDB.Where("tid = ?", tid).Limit(limit).Offset(page * limit).Find(&postTags)
