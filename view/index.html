@@ -34,15 +34,10 @@
                         {{range $i, $v := .newPosts}}
                         <tr>
                             <td class="py-3">OCT 25</td>
-                            <td class="py-3"><a class="text-dark text-decoration-none" href="">{{$v.Title}}</a> </td>
+                            <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
                             <td class="py-3 text-muted"><small>4 min read</small></td>
                         </tr>
                         {{end}}
-                        <tr>
-                            <td class="py-3">OCT 11</td>
-                            <td class="py-3"><a class="text-dark text-decoration-none" href="">What is a DAO exactly?</a></td>
-                            <td class="py-3 text-muted"><small>3 min read</small></td>
-                        </tr>
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">

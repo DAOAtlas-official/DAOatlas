@@ -26,40 +26,38 @@ import (
 
 //这里是详情页
 func GetView(c *gin.Context) {
-	vvv := util.GetView(c.Param("id"), 1) //获取文章详情
-	if vvv.ID == 0 {
+	pid, _ := strconv.Atoi(c.Param("id"))
+	post, daoAttr, _ := dao.GetDaoPostDetail(int64(pid))
+	// vvv := util.GetView(c.Param("id"), 1) //获取文章详情
+	if post.ID == 0 {
 		Not404(c)
 		c.Abort()
 		return
 	}
-	tm := time.Unix(int64(vvv.CreatedAt), 0)
-	vvv.Ctime = tm.Format("2006-01-02 15:04:05")
+	tm := time.Unix(int64(post.CreatedAt), 0)
+	post.Ctime = tm.Format("2006-01-02 15:04:05")
 
 	baseinfo, err := server.Getinfo()
 	if err != nil {
 		server.Fail(c)
 		return
 	}
-	body := template.HTML(vvv.Body)
+	body := template.HTML(post.Body)
+
+	// Todo: 获取 dao post 详情
+	if post.Scenes == model.DAO_POST {
+		c.HTML(http.StatusOK, "articlesDetail.html", gin.H{
+			"view":    post,
+			"body":    body,
+			"base":    baseinfo,
+			"daoAttr": daoAttr,
+		})
+		return
+	}
 	c.HTML(http.StatusOK, "articlesDetail.html", gin.H{
-		"view": vvv,
+		"view": post,
 		"body": body,
 		"base": baseinfo,
-	})
-}
-
-// Todo: 获取到 post 详情
-func GetDaoPost(c *gin.Context) {
-	pid, _ := strconv.Atoi(c.Param("id"))
-	post, daoAttr, _ := dao.GetDaoPostDetail(int64(pid))
-
-	body := template.HTML(post.Body)
-	baseinfo, _ := server.Getinfo()
-	c.HTML(http.StatusOK, "articlesDetail.html", gin.H{
-		"post":    post,
-		"daoAttr": daoAttr,
-		"body":    body,
-		"base":    baseinfo,
 	})
 }
 
