@@ -4,6 +4,8 @@ import (
 	"goblog/model"
 	"strings"
 	"sync"
+
+	"gorm.io/gorm"
 )
 
 // GetDaoAttr 获取 dao post
@@ -65,12 +67,15 @@ func GetTags(cate uint8, limit int) (tags []model.Tag, err error) {
 func LinkPostTag(pid int64, tags []model.PostTag) error {
 	arguments := make([]string, len(tags))
 	params := make([]interface{}, len(tags)*2)
+	tids := make([]int64, 0)
 	for j, tag := range tags {
 		arguments[j] = "(?,?)"
 		i := j * 2
 		params[i] = tag.Pid
 		params[i+1] = tag.Tid
+		tids = append(tids, tag.Tid)
 	}
+	MDB.Model(&model.Tag{}).Where(tids).UpdateColumn("use_count", gorm.Expr("use_count + ?", 1)) // tag使用量
 	err := MDB.Exec(`INSERT post_tag(pid, tid) values `+strings.Join(arguments, ","), params...).Error
 	return err
 }
