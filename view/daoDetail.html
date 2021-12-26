@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.base.Tdk.Title}}-DAOAtlas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/static/dao/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body class="bg">
+    <div class="container-fluid header">
+        {{template "nav.html" .}}
+    </div>
+    <div class="container page">
+        <nav>DAOs / DeveloperDAO <nav>
+                <div class="dao-head row  mt-5 mb-5">
+                    <div class="col-md-2 text-center"><img class="img-fluid" src="/static/imgs/logo-daos.png" alt=""></div>
+                    <div class="col-md-3">
+                        <h2 class="mt-4 text-center">{{.view.Title}}</h2>
+                        <div class="mt-4 text-center">
+                            <a class="px-2" href="{{.daoAttr.Website}}"><img src="/static/imgs/website.png" alt=""></a>
+                            <a class="px-2" href="{{.daoAttr.Twitter}}"><img src="/static/imgs/logo-twitter.png" alt=""></a>
+                            <a class="px-2" href="{{.daoAttr.Discord}}"><img src="/static/imgs/logo-discord.png" alt=""></a>
+                            <a class="px-2" href="{{.daoAttr.Wiki}}"><img src="/static/imgs/wikipedia.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-3 pt-5 text-center">
+                        <a href="#" class="dao-btn dao-btn-primary text-decoration-none rounded-pill">
+                            <span><img src="/static/imgs/icon_share.png" alt=""></span>
+                            <span>SHARE THIS DAO</span></a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link link-dark active" href="#Overview">Overview</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="#Goal">Goal</a>
+                        </li>                        
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="#Introduction">Introduction</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link link-dark" href="#How to Join">How to Join</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link link-dark" href="#Socials">Socials</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link link-dark" href="#Governance">Governance</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="Overview" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4">
+                    <h3><i class="bi-bookmark color-primary"></i><span class="px-3">Overview</span></h3>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <dl>
+                                <dd class="p-2"><span class="fw-bold">Category</span> <span>Social, Web3</span></dd>
+                                <dd class="p-2"><span class="fw-bold">Members</span> {{.daoAttr.Members}}</dd>
+                                <dd class="p-2"><span class="fw-bold">Key Contributors</span> {{.daoAttr.KeyContributors}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col">
+                            <dl>
+                                <dd class="p-2"><span class="fw-bold">Start Time</span> <span>{{.daoAttr.StartTime}}</span></dd>
+                                <dd class="p-2"><span class="fw-bold">Community Activities</span>{{.daoAttr.Activities}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div id="Goal" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4">
+                    <h3><i class="bi-bullseye color-primary"></i><span class="px-3">Goal</span></h3>
+                    {{.daoAttr.Summary}}
+                </div>                
+                <div id="Introduction" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4 lh-lg">
+                    <h3 class="mb-4"><i class="bi-receipt color-primary"></i><span class="px-3">Introduction</span></h3>
+                    <div>
+                        {{.body}}
+                    </div>
+                    <!-- <h4>Mission</h4>
+                    <p>Developer DAO exists to accelerate the education and impact of a new wave of web3 builders</p>
+                    <h4>Value</h4>
+                    <ul>
+                        <li>Transparency (open source everything, conversations in public, document and share journey)</li>
+                        <li>Diversity and Inclusion (seek to foster as diverse a membership as possible and support everyone to contribute)</li>
+                        <li>Responsibility (as a self-governed community we rely on members to be personally responsible for their actions
+                            and commitments to the community)</li>
+                    </ul>
+                    <h4>Goal</h4>
+                    <ul>
+                        <li>Transparency (open source everything, conversations in public, document and share journey)</li>
+                        <li>Diversity and Inclusion (seek to foster as diverse a membership as possible and support everyone to contribute)</li>
+                        <li>Responsibility (as a self-governed community we rely on members to be personally responsible for their actions
+                            and commitments to the community)</li>
+                    </ul> -->
+                </div>
+                <div id="How to Join" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4 lh-lg">
+                    <h3 class="mb-4"><i class="bi-person-plus color-primary"></i><span class="px-3">How to Join</span></h3>
+                    {{.daoAttr.HowToJoin}}
+                </div>
+                <div id="Socials" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4 lh-lg">
+                <h3 class="mb-4"><i class="bi-chat-right-text color-primary"></i><span class="px-3">Socials</span></h3>
+                    <table>
+                        <tr>
+                            <td class="fw-bold">Website</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Website}}"> {{.daoAttr.Website}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Twitter</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Twitter}}"> {{.daoAttr.Twitter}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Discord</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Discord}}">{{.daoAttr.Discord}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Wiki</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Wiki}}">{{.daoAttr.Wiki}}</a></td>
+                        </tr>                        
+                    </table>
+                </div>
+                <div id="Governance" class="bg-white rounded-3 shadow-sm px-5 py-4 mt-4 lh-lg">
+                    <h3 class="mb-4"><i class="bi-award color-primary"></i><span class="px-3">Governance</span></h3>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                    <table>
+                        <tr>
+                            <td class="fw-bold">Token</td>
+                            <td><a class="text-decoration-none px-3" href="">{{.daoAttr.TokenName}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Treasury</td>
+                            <td class="px-3">{{.daoAttr.Treasury}}</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Voting</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Voting}}">{{.daoAttr.Voting}}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Forum</td>
+                            <td><a class="text-decoration-none px-3" href="{{.daoAttr.Forum}}">{{.daoAttr.Forum}}</a></td>
+                        </tr>                        
+                    </table>
+                        </div>
+                        <div class="col-md-6">
+                    <table>
+                        <tr>
+                            <td class="fw-bold">Token  Holders</td>
+                            <td class="px-3">{{.daoAttr.TokenHolders}}</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">AUM</td>
+                            <td class="px-3">{{.daoAttr.AUM}}</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"></td>
+                            <td class="px-3"></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"></td>
+                            <td class="px-3"></td>
+                        </tr>                        
+                    </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-top mt-5 pt-3 d-flex  justify-content-between">
+                    <div class="text-muted f12 ">&copy2021 DaoAtlas </div>
+                    <div class="text-muted f12 ">Powered by DAOAtlas Genesis</div>
+                </div>
+    </div>
+</body>
+
+</html>
