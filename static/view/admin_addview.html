@@ -127,6 +127,24 @@
                 </div>
 
                 <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">summary</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea style="width: 100%;padding: 15px;" name="summary" id="summary" cols="30" v-model="daoAttr.summary" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">how_to_join</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <textarea style="width: 100%;padding: 15px;" name="how_to_join" id="how_to_join" cols="30" v-model="daoAttr.how_to_join" rows="10"></textarea>
+                    </div>
+                </div>
+                <!-- <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">summary</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
+                    </div>
+                </div> -->
+                <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-2">文章内容：</label>
                     <div class="formControls col-xs-8 col-sm-9">
                         <script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
@@ -316,7 +334,7 @@
                         tuijian: false,
                         swiper: false,
                     },
-                    daoInputAttr: [{key: 'summary', label: 'summary'},{key: 'activities', label: 'activities'},{key: 'how_to_join', label: 'how_to_join'},{key: 'discord', label: 'discord'},{key: 'wiki', label: 'wiki'},{key: 'twitter', label: 'twitter'},{key: 'website', label: 'website'},{key: 'forum', label: 'forum'},{key: 'voting', label: 'voting'},{key: 'AUM', label: 'AUM'},{key: 'treasury', label: 'treasury'},{key: 'token_holders', label: 'token_holders'},{key: 'token_link', label: 'token_link'},{key: 'token_name', label: 'token_name'},{key: 'key_contributors', label: 'key_contributors'}, {key: 'name', label: '名称'},{key: 'members', label: '成员'}],
+                    daoInputAttr: [{key: 'activities', label: 'activities'},{key: 'discord', label: 'discord'},{key: 'wiki', label: 'wiki'},{key: 'twitter', label: 'twitter'},{key: 'website', label: 'website'},{key: 'forum', label: 'forum'},{key: 'voting', label: 'voting'},{key: 'AUM', label: 'AUM'},{key: 'treasury', label: 'treasury'},{key: 'token_holders', label: 'token_holders'},{key: 'token_link', label: 'token_link'},{key: 'token_name', label: 'token_name'},{key: 'key_contributors', label: 'key_contributors'}, {key: 'name', label: '名称'},{key: 'members', label: '成员'}],
                     
                     daoAttr: {
                         pid: 0,
