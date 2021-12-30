@@ -44,7 +44,7 @@ func GetView(c *gin.Context) {
 	}
 	body := template.HTML(post.Body)
 
-	// Todo: 获取 dao post 详情
+	// Todo: 获取 DAO post 详情
 	if post.Scenes == model.DAO_POST {
 		c.HTML(http.StatusOK, "daoDetail.html", gin.H{
 			"view":    post,

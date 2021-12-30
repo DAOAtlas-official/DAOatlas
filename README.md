@@ -1,2 +1,2 @@
-# DAOatlas
-DAOatlas website 
+# DAOAtlas
+DAOAtlas website 

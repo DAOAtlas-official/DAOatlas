@@ -249,7 +249,7 @@ CREATE TABLE `views` (
 
 LOCK TABLES `views` WRITE;
 /*!40000 ALTER TABLE `views` DISABLE KEYS */;
-INSERT INTO `views` VALUES (1,1638620394,1638620394,NULL,1,'欢迎使用DAO list ',0,0,0,'',1,'欢迎使用DAO list','欢迎使用DAO list',1,NULL),(2,1638635584,1638635764,NULL,1,'标题党哈哈哈',0,1,0,'',1,'就是快递费积分电风扇','<p>就是快递费积分电风扇</p>',1,'Dao,EOS'),(3,1638636041,1638688296,NULL,1,'Dao 文章标题',0,1,0,'',1,'haohshdj 安徽省到付件','<p>haohshdj 安徽省到付件</p>',2,'10#ETH');
+INSERT INTO `views` VALUES (1,1638620394,1638620394,NULL,1,'欢迎使用DAO list ',0,0,0,'',1,'欢迎使用DAO list','欢迎使用DAO list',1,NULL),(2,1638635584,1638635764,NULL,1,'标题党哈哈哈',0,1,0,'',1,'就是快递费积分电风扇','<p>就是快递费积分电风扇</p>',1,'Dao,EOS'),(3,1638636041,1638688296,NULL,1,'DAO 文章标题',0,1,0,'',1,'haohshdj 安徽省到付件','<p>haohshdj 安徽省到付件</p>',2,'10#ETH');
 /*!40000 ALTER TABLE `views` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

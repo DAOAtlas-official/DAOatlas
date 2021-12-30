@@ -7,9 +7,9 @@
         "port":3306
     },
     "tdk":{
-        "title":"DAOatlas",
+        "title":"DAOAtlas",
         "keyword":"DAO list",
-        "description":"DAOatlas",
+        "description":"DAOAtlas",
         "biean":"3",
         "goan":"1",
         "goanurl":"2",
@@ -25,7 +25,7 @@
         
     },
     "adminuri":"/login",
-    "root_path": "/Users/jason/dev/DAOatlas",
+    "root_path": "/Users/jason/dev/DAOAtlas",
     "env": "debug",
     "addr": ":8080"
 }
