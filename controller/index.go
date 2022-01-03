@@ -63,7 +63,7 @@ func GetView(c *gin.Context) {
 
 //获取个人简介信息
 func About(c *gin.Context) {
-	vvv := util.GetView("0", 2) //个人简介
+	vvv := util.GetView("148", 2) //个人简介
 	if vvv.ID == 0 {
 		Not404(c)
 		c.Abort()
