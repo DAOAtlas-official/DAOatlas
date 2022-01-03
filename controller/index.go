@@ -153,12 +153,13 @@ func Index(c *gin.Context) {
 	// 热门
 	wg.Add(4)
 	go func() {
-		hotPosts = server.GetViewlist("-3", 1, 3)
+		// order by click
+		hotPosts = server.GetViewlist("-4", 1, 3)
 		wg.Done()
 	}()
 	// 最新
 	go func() {
-		newPosts = util.Imgsrc(server.GetViewlist("-5", 1, 3)) //最新
+		newPosts = util.Imgsrc(server.GetViewlist("-33", 1, 3)) //最新
 		wg.Done()
 	}()
 	// 标签

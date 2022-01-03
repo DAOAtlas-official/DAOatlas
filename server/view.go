@@ -16,7 +16,7 @@ func init() {
 
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
 func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
-	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
+	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if limit == 0 {
 		limit = 10 //一页默认10条
@@ -33,12 +33,14 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	case "-2":
 		JoinDAO.Where("swiper = ?", 1).Limit(limit / 2).Order(order).Find(&vi)
+	case "-33":
+		db.Limit(limit).Offset(page * limit).Order(order).Find(&vi)
 	case "-3":
 		JoinDAO.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
 	case "-4":
-		JoinDAO.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
 	case "-5":
-		JoinDAO.Where("tuijian = ?", 1).Limit(1).Order(order).Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	default:
 
 		JoinDAO.Where("typeid = ?", id).Limit(limit).Offset(page * limit).Order(order).Find(&vi)

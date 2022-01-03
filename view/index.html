@@ -24,8 +24,8 @@
                 <h4 class="py-2">New</h4>
                 <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
                     <div class="p-4 news-card-1" style="background-image: url({{ (index .newPosts 0 ).Pic }})">
-                        <h5 class="card-title">NOV 01</h5>
-                        <small>5 min read</small>
+                        <h5 class="card-title">{{(index .newPosts 0 ).Title}}</h5>
+                        <small>3 min read</small>
                         <h2 class="mt-4">New Post Today.</h2>
                     </div>
                 </a>
@@ -33,7 +33,7 @@
                     <tbody>
                         {{range $i, $v := .newPosts}}
                         <tr>
-                            <td class="py-3">OCT 25</td>
+                            <td class="py-3">{{$v.ID}}</td>
                             <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
                             <td class="py-3 text-muted"><small>4 min read</small></td>
                         </tr>
@@ -48,9 +48,10 @@
                 <h4 class="py-2">Hot</h4>
                 <a class="text-white  text-decoration-none" href="/view/{{(index .hotPosts 0 ).ID}}">
                     
-                        <div class="p-4 news-card-2" style="background-image: url({{(index .hotPosts 0 ).Pic}})">
-                            <h5 class="card-title">NOV 01</h5>
-                            <small>5 min read</small>
+                        <!-- <div class="p-4 news-card-2" style="background-image: url({{(index .hotPosts 0 ).Pic}})"> -->
+                        <div class="p-4 news-card-2" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
+                            <h5 class="card-title">{{(index .hotPosts 0 ).Title}}</h5>
+                            <small>4 min read</small>
                             <h2 class="mt-4">Hot Post Today.</h2>
                         </div>
                     
@@ -59,7 +60,7 @@
                     <tbody>
                         {{range $i, $v := .hotPosts}}
                         <tr>
-                            <td class="py-3">OCT 25</td>
+                            <td class="py-3">{{$v.ID}}</td>
                             <td class="py-3"><a rel="bookmark" class="text-dark text-decoration-none" title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
                             <td class="py-3 text-muted"><small>4 min read</small></td>
                         </tr>
