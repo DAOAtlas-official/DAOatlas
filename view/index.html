@@ -23,7 +23,7 @@
             <div class="col-md-6 px-5">
                 <h4 class="py-2">New</h4>
                 <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
-                    <div class="p-4 news-card-1" style="background-image: url({{ (index .newPosts 0 ).Pic }})">
+                    <div class="p-4 news-card-1" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
                         <h5 class="card-title">{{(index .newPosts 0 ).Title}}</h5>
                         <small>3 min read</small>
                         <h2 class="mt-4">New Post Today.</h2>
@@ -91,7 +91,7 @@
                                 <img src="{{$v.Pic}}" alt="">
                             </div>
                             <h4>{{$v.Title}}</h4>
-                            <p>16062 | Investment</p>
+                            <p> {{$v.ID}} | Investment</p>
                         </div>
                         <p class="px-4">{{$v.Content}}</p>
                         <div class="d-flex justify-content-center mt-5">
