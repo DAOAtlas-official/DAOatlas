@@ -164,13 +164,13 @@ func Index(c *gin.Context) {
 	}()
 	// 标签
 	go func() {
-		tags, _ = dao.GetTags(0, 15)
+		tags, _ = dao.GetTags(0, 30)
 		wg.Done()
 	}()
 
 	// 推荐
 	go func() {
-		recommendPosts = util.Imgsrc(server.GetViewlist("-4", 1, 15)) //推荐
+		recommendPosts = util.Imgsrc(server.GetViewlist("-44", 1, 30)) //推荐
 		wg.Done()
 	}()
 
