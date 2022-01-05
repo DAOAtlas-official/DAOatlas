@@ -28,11 +28,39 @@
 .dao-img {
     width: 100px;
     height: 100px;
-    margin: auto;
+    margin: 0 auto 10px;
 }
-.dao-img img {height: 100%;}
+.dao-img img {
+    height: 100%;
+}
 .article-cover {
     height: 215px;
     position: relative;
 }
 .article-cover img { height: 100%;}
+
+/*20220105*/
+.logo-pos{}
+.nav-ul{
+    flex: 1;
+    align-items: center;
+    justify-content: flex-start;
+}
+.banner-img{
+    width: 100%;
+}
+.p-cnt{
+    max-height: 135px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+.more-btn{
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 23px;
+    left: 50%;
+    margin-left: -66px;
+}
+.art-a, .art-a:hover{
+    color: #333;
+}
