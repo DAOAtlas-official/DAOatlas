@@ -38,7 +38,7 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	case "-3":
 		JoinDAO.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
 	case "-4":
-		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
+		db.Where("tuijian = ?", 1).Where("typeid = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
 	case "-44":
 		JoinDAO.Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
 	case "-5":
