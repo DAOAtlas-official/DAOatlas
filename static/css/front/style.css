@@ -63,4 +63,8 @@
 }
 .art-a, .art-a:hover{
     color: #333;
+    text-decoration: none;
+}
+.art-p-cnt{
+    padding-bottom: 1rem;
 }

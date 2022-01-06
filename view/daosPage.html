@@ -16,7 +16,7 @@
         {{template "nav.html" .}}
     </div>
 
-    <div class="dao-list mt-5">
+    <div class="dao-list">
         <div class="container">
             {{range $i, $v := .tags}}
             <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>

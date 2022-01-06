@@ -2,6 +2,10 @@
 .pos-re{
     position: relative;
 }
+.pos-ab{
+    position: absolute;
+    bottom: 0;
+}
 .pdlt-1{
     padding-left: 3rem;
 }
