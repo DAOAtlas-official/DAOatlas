@@ -8,14 +8,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link href="/static/css/front/style.css" rel="stylesheet">
+    <link href="/static/css/common.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="top-nav">
         {{template "nav.html" .}}
     </div>
 
-    <div class="dao-list mt-5">
+    <div class="dao-list">
         <div class="container">
             {{range $i, $v := .tags}}
             <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
@@ -26,16 +27,16 @@
             <div class="row ">
                 {{range $i, $v := .daoPosts}}
                 <div class="col-md-4 mb-4">
-                    <div class="dao-card shadow-sm">
+                    <div class="dao-card shadow-sm pos-re">
                         <div class="text-center">
                             <div class="dao-img">
                                 <img src="{{$v.Pic}}" alt="">
                             </div>
                             <h4>{{$v.Title}}</h4>
-                            <p>{{$v.Members}} | Investment</p>
+                            <p class="clr9">{{$v.Members}} Members | Investment</p>
                         </div>
-                        <p class="px-4">{{$v.Content}}</p>
-                        <div class="d-flex justify-content-center mt-5">
+                        <p class="px-4 p-cnt fs15">{{$v.Content}}</p>
+                        <div class="d-flex justify-content-center more-btn">
                             <a href="/view/{{$v.ID}}" class="read-more px-4 py-2 bg-more text-decoration-none">Read more</a>
                         </div>
                     </div>
@@ -43,18 +44,18 @@
                 {{end}}
             </div>
         </div>
-        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">See More...</a></div>
+        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">More...</a></div>
     </div>
     <div class="footer">
         <h3 class="text-center mb-4">Join the community</h3>
-        <div class="container text-center">
-            <a class="px-3" href=""><img src="imgs/twitter.png" alt=""></a>
-            <a class="px-3" href=""><img src="imgs/discord.png" alt=""></a>
-            <a class="px-3" href=""><img src="imgs/m.png" alt=""></a>
-            <a class="px-3" href=""><img src="imgs/github.png" alt=""></a>
+        <div class="container text-center fs-1">
+            <a class="px-3" href=""><i class="bi bi-twitter"></i></a>
+            <a class="px-3" href=""><i class="bi bi-discord"></i></a>
+            <a class="px-3" href=""><i class="bi bi-medium"></i></a>
+            <a class="px-3" href=""><i class="bi bi-github"></i></a>
         </div>
         <div class="container copy border-top mt-5 pt-3 d-flex  justify-content-between">
-            <div class="text-muted f12 ">&copy2022 DAOAtlas </div>
+            <div class="text-muted f12 ">&copy2021 DAOAtlas </div>
             <div class="text-muted f12 ">Powered by DAOAtlas Genesis</div>
 
         </div>
