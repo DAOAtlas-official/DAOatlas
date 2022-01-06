@@ -13,8 +13,20 @@
             <li class="nav-item"><a href="/articles" class="nav-link {{if eq .tab "articles"}}active {{end}}link-dark py-4">Articles</a></li>
             <li class="nav-item"><a href="/events" class="nav-link {{if eq .tab "events"}}active {{end}}link-dark py-4">Events</a></li>
             <li class="nav-item"><a href="/jobs" class="nav-link {{if eq .tab "jobs"}}active {{end}}link-dark py-4">DAO Jobs</a></li>
-            <li class="nav-item"><a href="/about" class="nav-link {{if eq .tab "about"}}active {{end}}link-dark py-4">About</a></li>                
+            <li class="nav-item"><a href="/about" id="aboutA" class="nav-link {{if eq .tab "about"}}active {{end}}link-dark py-4">About</a></li>                
         </ul>
     </header>
+
+    <script type="text/javascript">
+        // 仅解决About时无下划线
+        (function() {
+            const classStr = "nav-link link-dark py-4";
+            const regAbout = /\/about{1}$/; // 路由匹配 /about 1次, 且以 /about 结尾
+            const href = location.href;
+            
+            if(regAbout.test(href)) document.getElementById("aboutA").setAttribute("class", classStr + " active");
+            else document.getElementById("aboutA").setAttribute("class", classStr);
+        })()
+    </script>
 </div>
 {{end}}
