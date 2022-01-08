@@ -32,8 +32,13 @@ func articleList(c *gin.Context, tab string, tpl string, page string, where map[
 
 func Article(c *gin.Context) {
 	page := c.Query("page")
+	cid := c.Query("cid")
 	where := map[string]interface{}{
 		"status = ?": 1,
+	}
+	// 分类筛选
+	if cid != "" {
+		where["views.typeid = ?"] = cid
 	}
 	articleList(c, "articles", "articlesPage.html", page, where)
 	return

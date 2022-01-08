@@ -17,6 +17,7 @@ func DaosPageList(c *gin.Context) {
 	var daoPosts []dao.DaoPostItem
 	page := c.Query("page")
 	tagID := c.Query("tid")
+	cid := c.Query("cid") // 文章分类id
 	limit := 15
 	if page == "" {
 		page = "1"
@@ -35,6 +36,10 @@ func DaosPageList(c *gin.Context) {
 			"status = ?": 1,
 		}
 		if tagID == "" {
+			// 分类筛选
+			if cid != "" {
+				where["views.typeid = ?"] = cid
+			}
 			daoPosts, _ = dao.GetDaoPostList(int(pageNum), limit, where, "")
 		} else {
 			tid, _ := strconv.ParseInt(tagID, 10, 32)
