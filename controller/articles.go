@@ -15,6 +15,7 @@ func articleList(c *gin.Context, tab string, tpl string, page string, where map[
 	if page == "" {
 		page = "1"
 	}
+
 	pageNum, _ := strconv.ParseInt(page, 10, 32)
 	pageNum = pageNum - 1
 	// tpsID := 3 //需要查询Aritcles分类对应id
@@ -37,29 +38,42 @@ func Article(c *gin.Context) {
 		"status = ?": 1,
 	}
 	// 分类筛选
-	if cid != "" {
-		where["views.typeid = ?"] = cid
+	if cid == "" {
+		cid = "8"
 	}
+	where["views.typeid = ?"] = cid
 	articleList(c, "articles", "articlesPage.html", page, where)
 	return
 }
 
 func Events(c *gin.Context) {
 	page := c.Query("page")
-
+	cid := c.Query("cid")
 	where := map[string]interface{}{
 		"status = ?": 1,
 	}
+	// 分类筛选
+	if cid == "" {
+		cid = "6"
+	}
+	where["views.typeid = ?"] = cid
 	articleList(c, "events", "events.html", page, where)
 	return
 }
 
 func DaoJobs(c *gin.Context) {
 	page := c.Query("page")
+	cid := c.Query("cid")
 
 	where := map[string]interface{}{
 		"status = ?": 1,
 	}
+
+	// 分类筛选
+	if cid == "" {
+		cid = "7"
+	}
+	where["views.typeid = ?"] = cid
 	articleList(c, "jobs", "jobs.html", page, where)
 	return
 }
