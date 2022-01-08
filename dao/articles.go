@@ -17,3 +17,33 @@ func GetArticlesList(page int, limit int, where map[string]interface{}, order st
 	JoinDAO.Find(&articlesList)
 	return
 }
+
+func DelArticle(id int64) (err error) {
+	tx := MDB.Begin()
+	var article model.View
+	err = tx.Where("id = ?", id).First(&article).Error
+	if err != nil {
+		return err
+	}
+	// 删除扩展表记录
+	if article.Scenes == model.DAO_POST {
+		err = tx.Where("pid = ?", id).Delete(&model.DaoPost{}).Error
+		if err != nil {
+			tx.Rollback()
+			return err
+		}
+	}
+	// 删除关联标签
+	err = tx.Where("pid = ?", id).Delete(&model.PostTag{}).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	// 删除主文章表
+	err = tx.Delete(&article).Error
+	if err != nil {
+		tx.Rollback()
+		return err
+	}
+	return tx.Commit().Error
+}

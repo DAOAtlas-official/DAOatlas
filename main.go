@@ -71,6 +71,7 @@ func main() {
 		v1.POST("/edituser", con.EditUser)           //编辑用户信息
 		v1.GET("/edit/getuserinfo", con.GetUserInfo) //获取个人简介
 		v1.POST("/edit/user", con.EditUserInfo)      //编辑个人简介
+		v1.DELETE("/view/:id", con.DelView)          // 删除文章
 
 		// rest api 标签
 		v1.GET("/tag", con.GetTag)        // 获取文章tag
