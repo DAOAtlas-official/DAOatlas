@@ -17,6 +17,8 @@ func articleList(c *gin.Context, tab string, tpl string, page string, where map[
 	}
 	pageNum, _ := strconv.ParseInt(page, 10, 32)
 	pageNum = pageNum - 1
+	// tpsID := 3 //需要查询Aritcles分类对应id
+
 	list, _ := dao.GetArticlesList(int(pageNum), 15, where, "")
 	baseinfo, _ := server.Getinfo()
 
