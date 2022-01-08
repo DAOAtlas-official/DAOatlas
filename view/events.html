@@ -20,7 +20,7 @@
         {{range $i, $v := .articleList}}
         <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
             <h4 class="mb-4"><a class="link-dark text-decoration-none" href="">{{$v.Title}}</a></h4>
-            <p>{{$v.Content}} <a href="#">read-more</a> </p>
+            <p>{{$v.Content}} <br/><a href="/view/{{$v.ID}}">read-more</a> </p>
            <div class="d-flex">
             <a class="article-cover" href=""><img class="mr-1" src="{{$v.Pic}}" alt=""></a>
            </div>
