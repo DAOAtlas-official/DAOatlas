@@ -186,3 +186,14 @@ func GetCode(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{"msg": "获取成功", "code": 400, "id": id, "img": b64s})
 }
+
+func DelView(c *gin.Context) {
+	id := c.Param("id")
+	pid, _ := strconv.Atoi(id)
+	err := dao.DelArticle(int64(pid))
+	if err != nil {
+		c.JSON(500, gin.H{"msg": "删除是吧", "code": 500})
+		return
+	}
+	c.JSON(200, gin.H{"msg": "", "code": 200, "id": pid})
+}
