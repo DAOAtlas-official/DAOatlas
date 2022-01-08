@@ -1,16 +1,32 @@
 {{define "nav.html"}}
-<header class="d-flex flex-wrap justify-content-center">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none py-3">
-        <img src="/static/imgs/logo.png" alt="" class="d-inline-block">
-        <span class="fs-4 px-2">DaoAtlas</span>
-    </a>
-    <ul class="nav">
-        <li class="nav-item"><a href="/" class="nav-link {{if eq .tab "home"}}active {{end}}link-dark py-4">Home</a></li>
-        <li class="nav-item"><a href="/daosPage" class="nav-link {{if eq .tab "daoPost"}}active {{end}}link-dark py-4">DAOs</a></li>
-        <li class="nav-item"><a href="/articles" class="nav-link {{if eq .tab "articles"}}active {{end}}link-dark py-4">Articles</a></li>
-        <li class="nav-item"><a href="/events" class="nav-link {{if eq .tab "events"}}active {{end}}link-dark py-4">Events</a></li>
-        <li class="nav-item"><a href="/jobs" class="nav-link {{if eq .tab "jobs"}}jobs {{end}}link-dark py-4">DAO Jobs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link {{if eq .tab "about"}}about {{end}}link-dark py-4">About</a></li>                
-    </ul>
-</header>
+<div class="container">
+    <!-- <header class="d-flex flex-wrap justify-content-center"> -->
+    <header class="d-flex flex-wrap">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 text-dark text-decoration-none py-3 logo-pos">
+            <img src="/static/imgs/logo.png" alt="" class="d-inline-block">
+            <span class="fs-4 px-2">DAOAtlas</span>
+        </a>
+        <!-- <ul class="nav nav-ul"> -->
+        <ul class="nav">
+            <li class="nav-item"><a href="/" class="nav-link {{if eq .tab "home"}}active {{end}}link-dark py-4">Home</a></li>
+            <li class="nav-item"><a href="/daosPage" class="nav-link {{if eq .tab "daoPost"}}active {{end}}link-dark py-4">DAOs</a></li>
+            <li class="nav-item"><a href="/articles" class="nav-link {{if eq .tab "articles"}}active {{end}}link-dark py-4">Articles</a></li>
+            <li class="nav-item"><a href="/events" class="nav-link {{if eq .tab "events"}}active {{end}}link-dark py-4">Events</a></li>
+            <li class="nav-item"><a href="/jobs" class="nav-link {{if eq .tab "jobs"}}active {{end}}link-dark py-4">DAO Jobs</a></li>
+            <li class="nav-item"><a href="/about" id="aboutA" class="nav-link {{if eq .tab "about"}}active {{end}}link-dark py-4">About</a></li>                
+        </ul>
+    </header>
+
+    <script type="text/javascript">
+        // 仅解决About时无下划线
+        (function() {
+            const classStr = "nav-link link-dark py-4";
+            const regAbout = /\/about{1}$/; // 路由匹配 /about 1次, 且以 /about 结尾
+            const href = location.href;
+            
+            if(regAbout.test(href)) document.getElementById("aboutA").setAttribute("class", classStr + " active");
+            else document.getElementById("aboutA").setAttribute("class", classStr);
+        })()
+    </script>
+</div>
 {{end}}

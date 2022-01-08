@@ -8,7 +8,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// GetDaoAttr 获取 dao post
+// GetDaoAttr 获取 DAO post
 func GetDaoAttr(pid int64) (daoAttr model.DaoPost, err error) {
 	err = MDB.Where("pid = ?", pid).Find(&daoAttr).Error
 	return
@@ -19,25 +19,25 @@ type DaoPostItem struct {
 	model.DaoPost
 }
 
-// GetDaoPostList 获取dao post 数据列表
+// GetDaoPostList 获取DAO post 数据列表
 // where {"status = ? ": 1}
 func GetDaoPostList(page int, limit int, where map[string]interface{}, order string) (daoList []DaoPostItem, err error) {
 	db := MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content,dp.members")
-	JoinDao := db.Joins("LEFT JOIN dao_post AS dp ON dp.pid = views.id").Where("views.scenes = ?", model.DAO_POST)
-	JoinDao = JoinDao.Limit(limit).Offset(page * limit)
+	JoinDAO := db.Joins("LEFT JOIN dao_post AS dp ON dp.pid = views.id").Where("views.scenes = ?", model.DAO_POST)
+	JoinDAO = JoinDAO.Limit(limit).Offset(page * limit)
 	if where != nil {
 		for k, v := range where {
-			JoinDao = JoinDao.Where(k, v)
+			JoinDAO = JoinDAO.Where(k, v)
 		}
 	}
 	if order != "" {
-		JoinDao = JoinDao.Order(order)
+		JoinDAO = JoinDAO.Order(order)
 	}
-	JoinDao.Find(&daoList)
+	JoinDAO.Find(&daoList)
 	return
 }
 
-// GetDaoPostDetail 获取dao post 详情
+// GetDaoPostDetail 获取DAO post 详情
 func GetDaoPostDetail(id int64) (post model.View, daoAttr model.DaoPost, err error) {
 	var wg sync.WaitGroup
 	wg.Add(2)

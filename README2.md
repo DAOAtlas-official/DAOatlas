@@ -20,7 +20,7 @@ tpl_path: 项目根目录的 view/*
 supervisord 配置
 [program:daobin]
 
-environment=GIN_MODE=release, CONF_PATH=/work/DAOatlas/config
+environment=GIN_MODE=release, CONF_PATH=/work/DAOAtlas/config
 command = /mnt/wwwroot/golang/bin/daobin
 stdout_logfile = /home/wwwlogs/daobin/daobin.out
 stderr_logfile = /home/wwwlogs/daobin/daobin.err

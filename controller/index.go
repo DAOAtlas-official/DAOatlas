@@ -44,7 +44,7 @@ func GetView(c *gin.Context) {
 	}
 	body := template.HTML(post.Body)
 
-	// Todo: 获取 dao post 详情
+	// Todo: 获取 DAO post 详情
 	if post.Scenes == model.DAO_POST {
 		c.HTML(http.StatusOK, "daoDetail.html", gin.H{
 			"view":    post,
@@ -63,7 +63,7 @@ func GetView(c *gin.Context) {
 
 //获取个人简介信息
 func About(c *gin.Context) {
-	vvv := util.GetView("0", 2) //个人简介
+	vvv := util.GetView("148", 2) //个人简介
 	if vvv.ID == 0 {
 		Not404(c)
 		c.Abort()
@@ -153,23 +153,24 @@ func Index(c *gin.Context) {
 	// 热门
 	wg.Add(4)
 	go func() {
-		hotPosts = server.GetViewlist("-3", 1, 3)
+		// order by click
+		hotPosts = server.GetViewlist("-4", 1, 3)
 		wg.Done()
 	}()
 	// 最新
 	go func() {
-		newPosts = util.Imgsrc(server.GetViewlist("-5", 1, 3)) //最新
+		newPosts = util.Imgsrc(server.GetViewlist("-33", 1, 3)) //最新
 		wg.Done()
 	}()
 	// 标签
 	go func() {
-		tags, _ = dao.GetTags(0, 15)
+		tags, _ = dao.GetTags(0, 30)
 		wg.Done()
 	}()
 
-	// 推荐
+	// 推荐，显示所有dao
 	go func() {
-		recommendPosts = util.Imgsrc(server.GetViewlist("-4", 1, 15)) //推荐
+		recommendPosts = util.Imgsrc(server.GetViewlist("-44", 1, 15)) //推荐
 		wg.Done()
 	}()
 

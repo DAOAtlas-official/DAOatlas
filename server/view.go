@@ -7,17 +7,17 @@ import (
 	"goblog/util"
 )
 
-/* var JoinDao *gorm.DB
+/* var JoinDAO *gorm.DB
 
 func init() {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao = db.Joins("left join tps on tps.id = views.typeid")
+	JoinDAO = db.Joins("left join tps on tps.id = views.typeid")
 } */
 
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
 func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
-	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content, tps.name as Typename")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if limit == 0 {
 		limit = 10 //一页默认10条
 	}
@@ -28,20 +28,24 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	order := "created_at desc"
 	switch id {
 	case "0":
-		JoinDao.Limit(limit).Offset(page * limit).Order(order).Find(&vi)
+		JoinDAO.Limit(limit).Offset(page * limit).Order(order).Find(&vi)
 	case "-1":
-		JoinDao.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	case "-2":
-		JoinDao.Where("swiper = ?", 1).Limit(limit / 2).Order(order).Find(&vi)
+		JoinDAO.Where("swiper = ?", 1).Limit(limit / 2).Order(order).Find(&vi)
+	case "-33":
+		JoinDAO.Limit(limit).Where("scenes = ?", 1).Offset(page * limit).Order(order).Find(&vi)
 	case "-3":
-		JoinDao.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
+		JoinDAO.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
 	case "-4":
-		JoinDao.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Where("scenes = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
+	case "-44":
+		JoinDAO.Where("scenes = ?", 2).Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
 	case "-5":
-		JoinDao.Where("tuijian = ?", 1).Limit(1).Order(order).Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	default:
 
-		JoinDao.Where("typeid = ?", id).Limit(limit).Offset(page * limit).Order(order).Find(&vi)
+		JoinDAO.Where("typeid = ?", id).Limit(limit).Offset(page * limit).Order(order).Find(&vi)
 		//fmt.Printf("123%+v", &vi)
 	}
 	return
@@ -50,33 +54,33 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 //获取当前分类下面的10条文章
 func Findlist2(id string) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if id != "0" {
-		JoinDao = JoinDao.Where("typeid = ?", id)
+		JoinDAO = JoinDAO.Where("typeid = ?", id)
 	}
-	JoinDao.Limit(10).Order("created_at desc").Find(&vi)
+	JoinDAO.Limit(10).Order("created_at desc").Find(&vi)
 	return
 }
 
 //获取当前分类下面的10条文章
 func Findlist3(id string) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if id != "0" {
-		JoinDao = JoinDao.Where("typeid = ?", id)
+		JoinDAO = JoinDAO.Where("typeid = ?", id)
 	}
-	JoinDao.Limit(10).Order("created_at desc").Find(&vi)
+	JoinDAO.Limit(10).Order("created_at desc").Find(&vi)
 	return
 }
 
 //获取搜索到的信息
 func SearchView(views *model.ListInfo) (err error) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	util.Ini(&views.Page)
 	//fmt.Printf("pageinfo=%+v", *views)
 	//开始处理一下page信息
-	err = JoinDao.Where("title LIKE ?", "%"+views.Page.Keyword+"%").Limit(views.Page.Num).Order("created_at desc").Find(&views.Views).Count(&views.Page.Sum).Error
+	err = JoinDAO.Where("title LIKE ?", "%"+views.Page.Keyword+"%").Limit(views.Page.Num).Order("created_at desc").Find(&views.Views).Count(&views.Page.Sum).Error
 	return
 }
 
@@ -94,9 +98,9 @@ func GetListV(views *model.ListInfo) (err error) {
 		return
 	}
 	//fmt.Printf("info%+v", views)
-	JoinDao := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
+	JoinDAO := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
 	//util.Ini(&pa)
-	db := JoinDao.Where("views.status = 1")
+	db := JoinDAO.Where("views.status = 1")
 	if pa.ID != 0 {
 		db = db.Where("typeid = ?", pa.ID)
 		dao.MDB.Where("id = ?", pa.ID).First(&views.Listinfo)

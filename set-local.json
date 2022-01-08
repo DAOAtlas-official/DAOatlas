@@ -1,0 +1,31 @@
+{
+    "db":{
+        "user": "root",
+        "pwd": "",
+        "host":"127.0.0.1",
+        "db":"dao_collection",
+        "port":3306
+    },
+    "tdk":{
+        "title":"DAOAtlas",
+        "keyword":"DAO list",
+        "description":"DAOAtlas",
+        "biean":"3",
+        "goan":"1",
+        "goanurl":"2",
+        "tonjiid":"your_id"
+    },
+    "con":{
+        "domain":"www.aaa.cn",
+        "baidutonjiid":""
+    },
+    "baidu":{
+        "url":"to_be_entered",
+        "domain":"https://www.aaa.cn"
+        
+    },
+    "adminuri":"/login",
+    "root_path": "/Users/jason/dev/DAOAtlas",
+    "env": "debug",
+    "addr": ":8080"
+}

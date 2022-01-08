@@ -33,7 +33,7 @@ type View struct {
 	Body      string         `gorm:"size:5000" json:"body" form:"body"`             //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
 	Typename  string         `gorm:"-" json:"typename" form:"typename"`
-	Scenes    uint8          `gorm:"scenes" json:"scenes" form:"scenes"` // 1: 普通文章 2: Dao 文章
+	Scenes    uint8          `gorm:"scenes" json:"scenes" form:"scenes"` // 1: 普通文章 2: DAO 文章
 	Tag       string         `gorm:"tag" json:"tag" form:"tag"`          //  冗余存储Tag 主键`id#标签名` 逗号分割 12#Dao, 34#EOS
 }
 
@@ -112,7 +112,7 @@ func (t Tag) TableName() string {
 	return "tag"
 }
 
-// Dao 文章扩展表
+// DAO 文章扩展表
 type DaoPost struct {
 	// ID      int64 `gorm:"column:id" json:"id"`
 	Pid             int64  `gorm:"pid" json:"pid"` // View 表关联id

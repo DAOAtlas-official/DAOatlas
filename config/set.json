@@ -1,15 +1,15 @@
 {
     "db":{
         "user": "root",
-        "pwd": "root@Mysql",
+        "pwd": "",
         "host":"127.0.0.1",
         "db":"dao_collection",
         "port":3306
     },
     "tdk":{
-        "title":"DAOatlas",
+        "title":"DAOAtlas",
         "keyword":"DAO list",
-        "description":"DAOatlas",
+        "description":"DAOAtlas",
         "biean":"3",
         "goan":"1",
         "goanurl":"2",
@@ -25,7 +25,7 @@
         
     },
     "adminuri":"/login",
-    "root_path": "/Users/osmen/work/DAOatlas",
+    "root_path": "/Users/jason/dev/DAOatlas",
     "env": "debug",
     "addr": ":8080"
 }
