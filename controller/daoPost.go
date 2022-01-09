@@ -12,6 +12,7 @@ import (
 )
 
 func DaosPageList(c *gin.Context) {
+	const POPULAR_ID = 43 //默认显示popular标签
 	var wg sync.WaitGroup
 	var tags []model.Tag // 标签数据
 	var daoPosts []dao.DaoPostItem
@@ -39,6 +40,8 @@ func DaosPageList(c *gin.Context) {
 			// 分类筛选
 			if cid != "" {
 				where["views.typeid = ?"] = cid
+			} else {
+				where["views.typeid = ?"] = POPULAR_ID
 			}
 			daoPosts, _ = dao.GetDaoPostList(int(pageNum), limit, where, "")
 		} else {
