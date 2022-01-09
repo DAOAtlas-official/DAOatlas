@@ -18,6 +18,10 @@ func init() {
 func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+
+	db2 := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content,dao_post.members")
+	// JoinDAO2 := db2.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO2 := db2.Joins("left join dao_post on views.id = dao_post.pid").Where("views.status = 1")
 	if limit == 0 {
 		limit = 10 //一页默认10条
 	}
@@ -40,7 +44,7 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	case "-4":
 		JoinDAO.Where("tuijian = ?", 1).Where("scenes = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
 	case "-44":
-		JoinDAO.Where("scenes = ?", 2).Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
+		JoinDAO2.Where("scenes = ?", 2).Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
 	case "-5":
 		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	default:
