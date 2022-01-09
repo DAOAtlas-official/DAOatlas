@@ -170,7 +170,9 @@ func Index(c *gin.Context) {
 
 	// 推荐，显示所有dao
 	go func() {
+
 		recommendPosts = util.Imgsrc(server.GetViewlist("-44", 1, 15)) //推荐
+		// recommendPosts, _ = dao.GetDaoPostList(1, 15, where2, "") //推荐
 		wg.Done()
 	}()
 
