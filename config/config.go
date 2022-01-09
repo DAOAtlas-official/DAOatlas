@@ -42,8 +42,8 @@ func init() {
 	}
 
 	Configv.SetConfigType("json")
-	Configv.SetConfigName("set-local")
-	// Configv.SetConfigName("set")
+	// Configv.SetConfigName("set-local")
+	Configv.SetConfigName("set")
 	// Configv.SetConfigFile("config/set.json")
 	Configv.WatchConfig()
 	err := Configv.ReadInConfig()
