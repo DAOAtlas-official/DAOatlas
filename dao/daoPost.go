@@ -56,9 +56,9 @@ func GetDaoPostDetail(id int64) (post model.View, daoAttr model.DaoPost, err err
 // GetTags 获取tag
 func GetTags(cate uint8, limit int) (tags []model.Tag, err error) {
 	if cate != 0 {
-		err = MDB.Where("cate = ?", cate).Limit(limit).Find(&tags).Error
+		err = MDB.Where("cate = ?", cate).Limit(limit).Order("id desc").Find(&tags).Error
 	} else {
-		err = MDB.Limit(limit).Find(&tags).Error
+		err = MDB.Limit(limit).Find(&tags).Order("id desc").Error
 	}
 	return
 }
