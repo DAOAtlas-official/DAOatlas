@@ -12,7 +12,7 @@ import (
 )
 
 func DaosPageList(c *gin.Context) {
-	const POPULAR_ID string = "43" //默认显示popular标签
+	const POPULAR_ID string = "1" //默认显示popular标签
 	var wg sync.WaitGroup
 	var tags []model.Tag // 标签数据
 	var daoPosts []dao.DaoPostItem
