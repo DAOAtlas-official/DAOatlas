@@ -34,7 +34,8 @@
                     <tbody>
                         {{range $i, $v := .newPosts}}
                         <tr>
-                            <td class="py-3">{{$v.ID}}</td>
+                            <!-- <td class="py-3">{{$v.ID}}</td> -->
+                            <!-- <td class="py-3"></td> -->
                             <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
                             <td class="py-3 text-muted"><small>4 min read</small></td>
                         </tr>
@@ -61,7 +62,7 @@
                     <tbody>
                         {{range $i, $v := .hotPosts}}
                         <tr>
-                            <td class="py-3">{{$v.ID}}</td>
+                            <!-- <td class="py-3">{{$v.ID}}</td> -->
                             <td class="py-3"><a rel="bookmark" class="text-dark text-decoration-none" title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
                             <td class="py-3 text-muted"><small>4 min read</small></td>
                         </tr>
