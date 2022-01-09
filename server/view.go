@@ -22,6 +22,7 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 
 	db2 := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content,dao_post.members")
 	JoinDAO2 := db2.Joins("left join post_tag on post_tag.pid = views.id").Where("post_tag.tid = ?", POPULAR_ID)
+
 	JoinDAO2 = JoinDAO2.Joins("left join dao_post on views.id = dao_post.pid").Where("views.status = 1")
 	if limit == 0 {
 		limit = 10 //一页默认10条
