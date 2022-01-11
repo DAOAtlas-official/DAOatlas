@@ -19,12 +19,29 @@
     <div class="container page">
         
         {{range $i, $v := .articleList}}
+
+        <a href="/view/{{$v.ID}}" class="art-a">
         <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
+            <h4 class="mb-4">{{$v.Title}}</h4>
+            <div class="row">
+                <div class="col-md-8 pos-re">
+                    <p class="art-p-cnt">{{$v.Content}}</p>
+                    <!-- <div class="text-muted fs-7 pos-ab">Otc 3 · 3 min read</div>   -->
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="article-cover">
+                        <img class="img-fluid" src="{{$v.Pic}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+        <!-- <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
             <h4 class="mb-4">{{$v.Title}}</h4>
             <div>
                 {{$v.Content}}
             </div>
-        </div>
+        </div> -->
         {{end}}
          <!-- <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
             <h4 class="mb-4">BanklessDAO: Adding your skills and getting involved</h4>

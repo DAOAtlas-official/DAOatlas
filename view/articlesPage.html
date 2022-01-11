@@ -19,12 +19,13 @@
     <div class="container page">
         
         {{range $i, $v := .articleList}}
+        <a href="/view/{{$v.ID}}" class="art-a">
         <div class="p-5 bg-white rounded-3 shadow-sm mt-4 lh-lg">
-            <h4 class="mb-4"><a href="/view/{{$v.ID}}" class="art-a">{{$v.Title}}</a></h4>
+            <h4 class="mb-4">{{$v.Title}}</h4>
             <div class="row">
                 <div class="col-md-8 pos-re">
                     <p class="art-p-cnt">{{$v.Content}}</p>
-                    <div class="text-muted fs-7 pos-ab">Otc 3 · 3 min read</div>  
+                    <!-- <div class="text-muted fs-7 pos-ab">Otc 3 · 3 min read</div>   -->
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="article-cover">
@@ -33,6 +34,7 @@
                 </div>
             </div>
         </div>
+        </a>
         {{end}}      
         <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/articles?page={{.page}}">More...</a></div>        
     
