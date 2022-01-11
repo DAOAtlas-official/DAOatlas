@@ -32,7 +32,7 @@ func DaosPageList(c *gin.Context) {
 	// 标签
 	wg.Add(2)
 	go func() {
-		tags, _ = dao.GetTags(0, 15)
+		tags, _ = dao.GetTags(0, 150)
 		wg.Done()
 	}()
 
