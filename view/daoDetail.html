@@ -20,9 +20,9 @@
         <nav>DAOs / {{.view.Title}} <nav>
                 <div class="dao-head row  mt-5 mb-5">
                     <div class="col-md-2 text-center"><img class="img-fluid" src="{{.view.Pic}}" alt=""></div>
-                    <div class="col-md-3">
-                        <h2 class="mt-4 text-center">{{.view.Title}}</h2>
-                        <div class="mt-4 text-center min-wid267">
+                    <div class="col-md-9 pdlt-2">
+                        <h2 class="mt-4">{{.view.Title}}</h2>
+                        <div class="mt-4 min-wid267">
                             <a class="px-2" href="{{.daoAttr.Website}}" target='_blank'><img src="/static/imgs/website.png" alt=""></a>
                             <a class="px-2" href="{{.daoAttr.Twitter}}" target='_blank'><img src="/static/imgs/logo-twitter.png" alt=""></a>
                             <a class="px-2" href="{{.daoAttr.Discord}}" target='_blank'><img src="/static/imgs/logo-discord.png" alt=""></a>
@@ -89,9 +89,17 @@
                                 </dd>
                             </dl>
                         </div>
-                        <div class="dis-flex">
+                        <!-- <div class="">
                             <div class="fw-bold kc-title1">Key Contributors</div>
-                            <div class="dis-flex-column wd-bk">{{.daoAttr.KeyContributors}}</div>
+                            <div class="kc-cnt1 wd-bk">{{.daoAttr.KeyContributors}}</div>
+                        </div> -->
+                        <div>
+                            <table>
+                                <tr>
+                                    <td class="fw-bold kc-title1">Key Contributors</td>
+                                    <td class="wd-bk">{{.daoAttr.KeyContributors}}</td>
+                                </tr>             
+                            </table>
                         </div>
                     </div>
                 </div>
