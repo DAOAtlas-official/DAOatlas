@@ -47,7 +47,6 @@ type Comment struct {
 }
 
 type ViewJson struct {
-	View
 	ID        uint `gorm:"primarykey" json:"id" form:"id"`
 	CreatedAt uint
 	Typeid    int    ` json:"typeid" form:"typeid"` //分类的ID，关联
@@ -58,6 +57,9 @@ type ViewJson struct {
 	Content   string `json:"content" form:"content"`    //文章的简介
 	Typename  string ` json:"typename" form:"typename"` //存储一下分类名称
 	Ctime     string ` json:"ctime" form:"ctime"`
+	Summary   string `gorm:"column:summary" json:"summary"`
+	Members   string `gorm:"column:members" json:"members"`
+	Click     int            `gorm:"size:10" json:"click"`                          //点击量
 }
 
 //分类表
