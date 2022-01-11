@@ -59,6 +59,7 @@ type ViewJson struct {
 	Ctime     string ` json:"ctime" form:"ctime"`
 	Summary   string `gorm:"column:summary" json:"summary"`
 	Members   string `gorm:"column:members" json:"members"`
+	Click     int            `gorm:"size:10" json:"click"`                          //点击量
 }
 
 //分类表
