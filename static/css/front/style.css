@@ -91,4 +91,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.kc-cnt1{}
+.kc-cnt1{
+    display: inline-block;
+    max-width: 888px;
+}
