@@ -6,6 +6,22 @@
     position: absolute;
     bottom: 0;
 }
+.dis-flex{
+    display:-webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.dis-flex-column{
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
+}
+.wd-bk{
+	word-break: break-all;
+}
+.min-wid267{
+	min-width: 267px;
+}
 .pdlt-1{
     padding-left: 3rem;
 }
