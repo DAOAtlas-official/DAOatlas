@@ -20,7 +20,7 @@ func articleList(c *gin.Context, tab string, tpl string, page string, where map[
 	pageNum = pageNum - 1
 	// tpsID := 3 //需要查询Aritcles分类对应id
 
-	list, _ := dao.GetArticlesList(int(pageNum), 15, where, "created_at desc")
+	list, _ := dao.GetArticlesList(int(pageNum), 15, where, "updated_at desc")
 	baseinfo, _ := server.Getinfo()
 
 	c.HTML(http.StatusOK, tpl, gin.H{
@@ -39,9 +39,9 @@ func Article(c *gin.Context) {
 	}
 	// 分类筛选
 	if cid == "" {
-		cid = "8"
+		cid = "(3,4,8)"
 	}
-	where["views.typeid = ?"] = cid
+	where["views.typeid in (3,4,8) and 1 = ?"] = 1
 	articleList(c, "articles", "articlesPage.html", page, where)
 	return
 }
