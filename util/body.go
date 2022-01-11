@@ -25,9 +25,9 @@ func GetTypeCount(id string) int64 {
 	var i int64
 	db := dao.MDB
 	if id == "0" {
-		db.Find(&d.View{}).Count(&i)
+		db.Find(&d.View{}).Where("deleted_at is null").Count(&i)
 	} else {
-		db.Model(&d.View{}).Where("typeid = ?", id).Count(&i)
+		db.Model(&d.View{}).Where("typeid = ?", id).Where("deleted_at is null").Count(&i)
 	}
 	return i
 }

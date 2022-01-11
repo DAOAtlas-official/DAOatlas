@@ -18,10 +18,10 @@ func init() {
 func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	const POPULAR_ID string = "1"
 	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1").Where("views.deleted_at is null")
 
 	db2 := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content,dao_post.members,dao_post.summary")
-	JoinDAO2 := db2.Joins("left join post_tag on post_tag.pid = views.id").Where("post_tag.tid = ?", POPULAR_ID)
+	JoinDAO2 := db2.Joins("left join post_tag on post_tag.pid = views.id").Where("post_tag.tid = ?", POPULAR_ID).Where("views.deleted_at is null")
 
 	JoinDAO2 = JoinDAO2.Joins("left join dao_post on views.id = dao_post.pid").Where("views.status = 1")
 	if limit == 0 {

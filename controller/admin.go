@@ -42,7 +42,7 @@ func AdminGetId(c *gin.Context) {
 //后台的文章的管理页面
 func AdminList(c *gin.Context) {
 	pagenum := util.PageNum(c)                   //获取当前第几页
-	list := server.GetViewlist("0", pagenum, 20) //列表数据
+	list := server.GetViewlist("0", pagenum, 10) //列表数据
 	i := util.GetTypeCount("0")                  //获取总共的文章数量
 	p := util.GetPage(i, pagenum)
 	c.HTML(http.StatusOK, "admin_list.html", gin.H{
