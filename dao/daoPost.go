@@ -24,7 +24,8 @@ type DaoPostItem struct {
 func GetDaoPostList(page int, limit int, where map[string]interface{}, order string) (daoList []DaoPostItem, err error) {
 	db := MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content,dp.members,dp.summary")
 	JoinDAO := db.Joins("LEFT JOIN dao_post AS dp ON dp.pid = views.id").Where("views.scenes = ?", model.DAO_POST).Order("updated_at desc")
-	JoinDAO = JoinDAO.Limit(limit).Offset(page * limit)
+	// JoinDAO = JoinDAO.Limit(limit).Offset(page * limit)
+	JoinDAO = JoinDAO.Limit(limit)
 	if where != nil {
 		for k, v := range where {
 			JoinDAO = JoinDAO.Where(k, v)
