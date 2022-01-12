@@ -451,10 +451,10 @@
                     console.log(this.arcdata);
                     const param = {post_data: this.arcdata}
                     if (scenes == 2) param.dao_attr = this.daoAttr;
-                    console.log(param);
-                    return;
+                    // console.log(param);
+                    // return;
                     
-                    /*$.ajax({
+                    $.ajax({
                         contentType: 'application/json',
                         type: 'POST',
                         url: url,
@@ -473,7 +473,7 @@
                                 layer.msg('更新失败')
                             }
                         }
-                    })*/
+                    })
                 },
             }
             ,
