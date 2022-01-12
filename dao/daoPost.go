@@ -80,7 +80,24 @@ func LinkPostTag(pid int64, tags []model.PostTag) error {
 	return err
 }
 
+// 根据文章id获取标签
+func GetPostTagsByPid(pid int64) (tags []model.PostTag, err error) {
+	err = MDB.Where("pid = ?", pid).Find(&tags).Error
+	return
+}
+
 func UnLinkPostTag(pid int64) error {
+	// 获取之前的标签
+	tags, err := GetPostTagsByPid(pid)
+	if err == nil && len(tags) > 0 {
+		tids := make([]int64, 0, len(tags))
+		for _, tag := range tags {
+			tids = append(tids, tag.Tid)
+		}
+		// 同步tag使用量
+		MDB.Model(&model.Tag{}).Where(tids).UpdateColumn("use_count", gorm.Expr("use_count - ?", 1))
+	}
+
 	return MDB.Where("pid = ?", pid).Delete(model.PostTag{}).Error
 }
 
