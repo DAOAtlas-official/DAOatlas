@@ -6,8 +6,33 @@
     position: absolute;
     bottom: 0;
 }
+.dis-flex{
+    display:-webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.dis-flex-column{
+    -webkit-box-flex:1;
+    -webkit-flex:1;
+    flex:1;
+}
+.wd-bk{
+	word-break: break-all;
+}
+.min-wid267{
+	min-width: 267px;
+}
 .pdlt-1{
     padding-left: 3rem;
+}
+.pdlt-2{
+    padding-left: 2rem;
+}
+.pdlt-3{
+    padding-left: 12px;
+}
+.vt-al-tp{
+	vertical-align: text-top;
 }
 .clr9{
     color: #999!important;

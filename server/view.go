@@ -16,8 +16,14 @@ func init() {
 
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
 func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
+	const POPULAR_ID string = "1"
 	db := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
+	JoinDAO := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1").Where("views.deleted_at is null")
+
+	db2 := dao.MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,updated_at,views.pic,views.typeid,views.content,dao_post.members,dao_post.summary")
+	JoinDAO2 := db2.Joins("left join post_tag on post_tag.pid = views.id").Where("post_tag.tid = ?", POPULAR_ID).Where("views.deleted_at is null")
+
+	JoinDAO2 = JoinDAO2.Joins("left join dao_post on views.id = dao_post.pid").Where("views.status = 1")
 	if limit == 0 {
 		limit = 10 //一页默认10条
 	}
@@ -34,13 +40,13 @@ func GetViewlist(id interface{}, page int, limit int) (vi []model.ViewJson) {
 	case "-2":
 		JoinDAO.Where("swiper = ?", 1).Limit(limit / 2).Order(order).Find(&vi)
 	case "-33":
-		JoinDAO.Limit(limit).Where("scenes = ?", 1).Offset(page * limit).Order(order).Find(&vi)
+		JoinDAO.Limit(limit).Where("typeid = ?", 3).Offset(page * limit).Order("updated_at desc").Find(&vi)//首页NEW
 	case "-3":
 		JoinDAO.Limit(limit).Offset(page * limit).Order("click desc").Find(&vi)
 	case "-4":
-		JoinDAO.Where("tuijian = ?", 1).Where("scenes = ?", 1).Limit(limit).Order("updated_at desc").Find(&vi)
+		JoinDAO.Where("tuijian = ?", 1).Where("scenes = ?", 1).Where("typeid = ?", 4).Limit(limit).Order("updated_at desc").Find(&vi)//首页HOT
 	case "-44":
-		JoinDAO.Where("scenes = ?", 2).Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
+		JoinDAO2.Where("scenes = ?", 2).Limit(limit).Offset(page * limit).Order("updated_at desc").Find(&vi)
 	case "-5":
 		JoinDAO.Where("tuijian = ?", 1).Limit(limit).Order(order).Find(&vi)
 	default:

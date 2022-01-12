@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
     <title>{{.base.Tdk.Title}}-DAOAtlas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
@@ -26,7 +27,7 @@
                 <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
                     <div class="p-4 news-card-1" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
                         <h5 class="card-title">{{(index .newPosts 0 ).Title}}</h5>
-                        <small>3 min read</small>
+                        <!-- <small>3 min read</small> -->
                         <h2 class="mt-4">New Post Today.</h2>
                     </div>
                 </a>
@@ -34,9 +35,10 @@
                     <tbody>
                         {{range $i, $v := .newPosts}}
                         <tr>
-                            <td class="py-3">{{$v.ID}}</td>
+                            <!-- <td class="py-3">{{$v.ID}}</td> -->
+                            <!-- <td class="py-3"></td> -->
                             <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            <td class="py-3 text-muted"><small>4 min read</small></td>
+                            <!-- <td class="py-3 text-muted"><small>4 min read</small></td> -->
                         </tr>
                         {{end}}
                     </tbody>
@@ -52,7 +54,7 @@
                        
                         <div class="p-4 news-card-2" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
                             <h5 class="card-title">{{(index .hotPosts 0 ).Title}}</h5>
-                            <small>4 min read</small>
+                            <!-- <small>4 min read</small> -->
                             <h2 class="mt-4">Hot Post Today.</h2>
                         </div>
                     
@@ -61,9 +63,9 @@
                     <tbody>
                         {{range $i, $v := .hotPosts}}
                         <tr>
-                            <td class="py-3">{{$v.ID}}</td>
+                            <!-- <td class="py-3">{{$v.ID}}</td> -->
                             <td class="py-3"><a rel="bookmark" class="text-dark text-decoration-none" title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            <td class="py-3 text-muted"><small>4 min read</small></td>
+                            <!-- <td class="py-3 text-muted"><small>4 min read</small></td> -->
                         </tr>
                         {{end}}
                     </tbody>
@@ -92,9 +94,9 @@
                                 <img src="{{$v.Pic}}" alt="">
                             </div>
                             <h4>{{$v.Title}}</h4>
-                            <p class="clr9">{{$v.ID}} Members | Investment</p>
+                            <p class="clr9">{{$v.Members}} Members</p>
                         </div>
-                        <p class="px-4 p-cnt fs15">{{$v.Content}}</p>
+                        <p class="px-4 p-cnt fs15">{{$v.Summary}}</p>
                         <div class="d-flex justify-content-center more-btn">
                             <a href="/view/{{$v.ID}}" class="read-more px-4 py-2 bg-more text-decoration-none">Read more</a>
                         </div>
@@ -105,19 +107,7 @@
         </div>
         <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage">More...</a></div>
     </div>
-    <div class="footer">
-        <h3 class="text-center mb-4">Join the community</h3>
-        <div class="container text-center fs-1">
-            <a class="px-3" href=""><i class="bi bi-twitter"></i></a>
-            <a class="px-3" href=""><i class="bi bi-discord"></i></a>
-            <a class="px-3" href=""><i class="bi bi-medium"></i></a>
-            <a class="px-3" href=""><i class="bi bi-github"></i></a>
-        </div>
-        <div class="container copy border-top mt-5 pt-3 d-flex  justify-content-between">
-            <div class="text-muted f12 ">&copy2021 DAOAtlas </div>
-            <div class="text-muted f12 ">Powered by DAOAtlas Genesis</div>
-        </div>
-    </div>
+    {{template "footer.html" .}}
 </body>
 
 </html>

@@ -68,3 +68,30 @@
 .art-p-cnt{
     padding-bottom: 1rem;
 }
+
+.key-contributors{
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: normal;
+}
+.kc-title{
+    width: 142px;
+    vertical-align: top;
+}
+.kc-title1{
+    padding: 0 .5rem;
+    width: 155px;
+}
+.detail-ov-cnt{}
+.kc-cnt{
+    display: inline-block;
+    max-width: 550px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.kc-cnt1{
+    display: inline-block;
+    max-width: 888px;
+}

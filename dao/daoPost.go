@@ -22,9 +22,10 @@ type DaoPostItem struct {
 // GetDaoPostList 获取DAO post 数据列表
 // where {"status = ? ": 1}
 func GetDaoPostList(page int, limit int, where map[string]interface{}, order string) (daoList []DaoPostItem, err error) {
-	db := MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content,dp.members")
-	JoinDAO := db.Joins("LEFT JOIN dao_post AS dp ON dp.pid = views.id").Where("views.scenes = ?", model.DAO_POST)
-	JoinDAO = JoinDAO.Limit(limit).Offset(page * limit)
+	db := MDB.Table("views").Select("views.id,views.scenes,views.title,views.click,views.created_at,views.pic,views.typeid,views.content,dp.members,dp.summary")
+	JoinDAO := db.Joins("LEFT JOIN dao_post AS dp ON dp.pid = views.id").Where("views.scenes = ?", model.DAO_POST).Order("updated_at desc")
+	// JoinDAO = JoinDAO.Limit(limit).Offset(page * limit)
+	JoinDAO = JoinDAO.Limit(limit)
 	if where != nil {
 		for k, v := range where {
 			JoinDAO = JoinDAO.Where(k, v)
@@ -56,9 +57,9 @@ func GetDaoPostDetail(id int64) (post model.View, daoAttr model.DaoPost, err err
 // GetTags 获取tag
 func GetTags(cate uint8, limit int) (tags []model.Tag, err error) {
 	if cate != 0 {
-		err = MDB.Where("cate = ?", cate).Limit(limit).Find(&tags).Error
+		err = MDB.Where("cate = ?", cate).Limit(limit).Order("id desc").Find(&tags).Error
 	} else {
-		err = MDB.Limit(limit).Find(&tags).Error
+		err = MDB.Limit(limit).Find(&tags).Order("id desc").Error
 	}
 	return
 }

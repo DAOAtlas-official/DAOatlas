@@ -12,6 +12,7 @@ import (
 )
 
 func DaosPageList(c *gin.Context) {
+	const POPULAR_ID string = "1" //默认显示popular标签
 	var wg sync.WaitGroup
 	var tags []model.Tag // 标签数据
 	var daoPosts []dao.DaoPostItem
@@ -22,12 +23,16 @@ func DaosPageList(c *gin.Context) {
 	if page == "" {
 		page = "1"
 	}
+	if (tagID == "") && (cid == "") {
+		tagID = POPULAR_ID
+	}
+
 	pageNum, _ := strconv.ParseInt(page, 10, 32)
 	pageNum = pageNum - 1
 	// 标签
 	wg.Add(2)
 	go func() {
-		tags, _ = dao.GetTags(0, 15)
+		tags, _ = dao.GetTags(0, 150)
 		wg.Done()
 	}()
 
@@ -39,6 +44,8 @@ func DaosPageList(c *gin.Context) {
 			// 分类筛选
 			if cid != "" {
 				where["views.typeid = ?"] = cid
+			} else {
+				where["views.typeid = ?"] = POPULAR_ID
 			}
 			daoPosts, _ = dao.GetDaoPostList(int(pageNum), limit, where, "")
 		} else {
