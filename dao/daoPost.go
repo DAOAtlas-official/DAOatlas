@@ -46,6 +46,7 @@ func GetDaoPostDetail(id int64) (post model.View, daoAttr model.DaoPost, err err
 		err = MDB.Where("id = ?", id).Find(&post).Error
 		wg.Done()
 	}()
+
 	go func() {
 		err = MDB.Where("pid = ?", id).Find(&daoAttr).Error
 		wg.Done()
