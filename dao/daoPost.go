@@ -39,11 +39,17 @@ func GetDaoPostList(page int, limit int, where map[string]interface{}, order str
 }
 
 // GetDaoPostDetail 获取DAO post 详情
-func GetDaoPostDetail(id int64) (post model.View, daoAttr model.DaoPost, err error) {
+func GetDaoPostDetail(id int64) (post model.View, post_tag model.PostTag, daoAttr model.DaoPost, err error) {
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(3)
 	go func() {
 		err = MDB.Where("id = ?", id).Find(&post).Error
+		wg.Done()
+	}()
+
+	// jason add to get dao detail tags by view_id
+	go func() {
+		err = MDB.Where("pid = ?", post.ID).Find(&post_tag).Error
 		wg.Done()
 	}()
 
