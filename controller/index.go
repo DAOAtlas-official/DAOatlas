@@ -27,7 +27,7 @@ import (
 //这里是详情页
 func GetView(c *gin.Context) {
 	pid, _ := strconv.Atoi(c.Param("id"))
-	post, daoAttr, _ := dao.GetDaoPostDetail(int64(pid))
+	post, post_tag, daoAttr, _ := dao.GetDaoPostDetail(int64(pid))
 	// vvv := util.GetView(c.Param("id"), 1) //获取文章详情
 	if post.ID == 0 {
 		Not404(c)
@@ -47,10 +47,11 @@ func GetView(c *gin.Context) {
 	// Todo: 获取 DAO post 详情
 	if post.Scenes == model.DAO_POST {
 		c.HTML(http.StatusOK, "daoDetail.html", gin.H{
-			"view":    post,
-			"body":    body,
-			"base":    baseinfo,
-			"daoAttr": daoAttr,
+			"view":     post,
+			"body":     body,
+			"base":     baseinfo,
+			"post_tag": post_tag,
+			"daoAttr":  daoAttr,
 		})
 		return
 	}

@@ -106,12 +106,12 @@ func AddView(c *gin.Context) {
 		tx.Commit()
 		msg = "更新成功"
 		if params.PostData.Tag != "" {
-			// 删除之前的关联
 			tagsM := formatTags(int64(params.PostData.ID), params.PostData.Tag)
+			// 删除之前的关联
 			dao.UnLinkPostTag(int64(params.PostData.ID))
+			// 重新关联
 			dao.LinkPostTag(int64(params.PostData.ID), tagsM)
 		}
-		// todo: 标签关联
 	} else {
 		err = tx.Create(&data).Error
 		params.PostData.ID = data.ID
