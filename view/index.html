@@ -22,12 +22,60 @@
     </div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-6 px-5">
-                <h4 class="py-2">New</h4>
-                <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
-                    <div class="p-4 news-card-1" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
+            <div class="col-md-9 new-px-r">
+                <div class="row line-bm nh-title">
+                    <div class="col-md-9 pd-0">
+                        <div class="fs24 fs600 clr3">New</div>
+                    </div>
+                    <div class="col-md-3 pd-0 al-rt nh-t-more">
+                        <a href="" class="clr2-1">
+                            <span>Read More</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="new-cnt">
+                    <div class="row new-cnt-top">
+                        <div class="col-md-4 pd-0">
+                            <div class="fs30 fs600 mgbm-15 title">
+                                <a href="" class="clr3">Silicon Valley has no idea about the ‘metaverse’</a>
+                            </div>
+                            <div class="fs16 clr2-1 mgbm-20 cnt overflow-hidden">Silicon Valley denizens are making the rounds bloviating on their ideas about the ‘metaverse’ which basically are nonsense vehicles for selling more eyeballs…</div>
+                            <div class="fs14 clr2-2 dtime">NOV 12 · 4 min read</div>
+                        </div>
+                        <div class="col-md-8 pd-0 cover-box">
+                            <div class="cover-img">
+                                <img src="/static/upload/images/20220103/123.png" alt="" class="img-fluid banner-img" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="new-cnt-btm">
+                        <div class="new-block line-tp">
+                            <div class="fs20 fs600 mgbm-20 title overflow-hidden">
+                                <a href="" class="clr2">How to provide liquidity to the Bankless 80/20 Pool</a>
+                            </div>
+                            <div class="fs14 clr2-2 dtime">OCT 25 · 4 min read</div>
+                        </div>
+                        <div class="new-block line-tp">
+                            <div class="fs20 fs600 clr2 mgbm-20 title overflow-hidden">
+                                <a href="" class="clr2">What can we do with a DAO in 2021?</a>
+                            </div>
+                            <div class="fs14 clr2-2 dtime">OCT 18 · 4 min read</div>
+                        </div>
+                        <div class="new-block line-tp">
+                            <div class="fs20 fs600 mgbm-20 title overflow-hidden">
+                                <a href="" class="clr2">What is a DAO exactly?</a>
+                            </div>
+                            <div class="fs14 clr2-2 dtime">OCT 12 · 4 min read </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
+                    <div class="p-4 news-card-1" style="background-image: url('/static/upload/images/20220103/123.png')">
                         <h5 class="card-title">{{(index .newPosts 0 ).Title}}</h5>
-                        <!-- <small>3 min read</small> -->
+                        !-- <small>3 min read</small> --
                         <h2 class="mt-4">New Post Today.</h2>
                     </div>
                 </a>
@@ -35,26 +83,59 @@
                     <tbody>
                         {{range $i, $v := .newPosts}}
                         <tr>
-                            <!-- <td class="py-3">{{$v.ID}}</td> -->
-                            <!-- <td class="py-3"></td> -->
+                            !-- <td class="py-3">{{$v.ID}}</td> --
+                            !-- <td class="py-3"></td> --
                             <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            <!-- <td class="py-3 text-muted"><small>4 min read</small></td> -->
+                            !-- <td class="py-3 text-muted"><small>4 min read</small></td> --
                         </tr>
                         {{end}}
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
                     <a href="/articles" class="read-more px-2 py-1 f12 text-decoration-none">Read more</a>
-                </div>
+                </div> -->
             </div>
-            <div class="col-md-6 px-5">
-                <h4 class="py-2">Hot</h4>
-                <a class="text-white  text-decoration-none" href="/view/{{(index .hotPosts 0 ).ID}}">
-                    
-                       
-                        <div class="p-4 news-card-2" style="background-image: url('/static/upload/images/20220103/1641218781696.png')">
+            <div class="col-md-3 hot-px-l">
+                <div class="row line-bm nh-title">
+                    <div class="col-md-3 pd-0">
+                        <div class="fs24 fs600 clr3">Hot</div>
+                    </div>
+                    <div class="col-md-9 pd-0 al-rt nh-t-more">
+                        <a href="" class="clr2-1">
+                            <span>Read More</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hot-cnt">
+                    <div class="hot-block">
+                        <div class="cover-img">
+                            <img src="/static/upload/images/20220103/456.jpeg" alt="" class="img-fluid banner-img" />
+                        </div>
+                        <div class="fs20 fs600 mgbm-20 title overflow-hidden">
+                            <a href="" class="clr2">How to provide liquidity to the Bankless 80/20 Pool</a>
+                        </div>
+                        <div class="fs14 clr2-2 dtime">OCT 25 · 4 min read</div>
+                    </div>
+                    <div class="hot-block">
+                        <div class="fs20 fs600 mgbm-20 title overflow-hidden">
+                            <a href="" class="clr2">What can we do with a DAO in 2021?</a>
+                        </div>
+                        <div class="fs14 clr2-2 dtime">OCT 18 · 4 min read</div>
+                    </div>
+                    <div class="hot-block">
+                        <div class="fs20 fs600 mgbm-20 title overflow-hidden">
+                            <a href="" class="clr2">What is a DAO exactly?</a>
+                        </div>
+                        <div class="fs14 clr2-2 dtime">OCT 12 · 4 min read </div>
+                    </div>
+                </div>
+
+                <!-- <a class="text-white  text-decoration-none" href="/view/{{(index .hotPosts 0 ).ID}}">
+                        <div class="p-4 news-card-2" style="background-image: url('/static/upload/images/20220103/456.jpeg')">
                             <h5 class="card-title">{{(index .hotPosts 0 ).Title}}</h5>
-                            <!-- <small>4 min read</small> -->
+                            !-- <small>4 min read</small> --
                             <h2 class="mt-4">Hot Post Today.</h2>
                         </div>
                     
@@ -63,23 +144,26 @@
                     <tbody>
                         {{range $i, $v := .hotPosts}}
                         <tr>
-                            <!-- <td class="py-3">{{$v.ID}}</td> -->
+                            !-- <td class="py-3">{{$v.ID}}</td> --
                             <td class="py-3"><a rel="bookmark" class="text-dark text-decoration-none" title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            <!-- <td class="py-3 text-muted"><small>4 min read</small></td> -->
+                            !-- <td class="py-3 text-muted"><small>4 min read</small></td> --
                         </tr>
                         {{end}}
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
                     <a href="/daosPage" class="read-more px-2 py-1 text-decoration-none f12">Read more</a>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     <div class="dao-list mt-5">
         <div class="container">
             {{range $i, $v := .tags}}
-            <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
+            <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-home rounded-pill text-decoration-none">
+                <span class="fs600">{{$v.Name}}</span>
+                <span class="nub px-2">{{$v.UseCount}}</span>
+            </a>
             {{end}}
              </div>
         <div class="cl"></div>
@@ -93,19 +177,25 @@
                             <div class="dao-img">
                                 <img src="{{$v.Pic}}" alt="">
                             </div>
-                            <h4>{{$v.Title}}</h4>
-                            <p class="clr9">{{$v.Members}} Members</p>
+                            <div class="title clr2 fs24 fs600">{{$v.Title}}</div>
+                            <p class="fs16 clr2 mgtp-1">
+                                <span>{{$v.Members}}</span>
+                                <span class="divider divider-vertical"></span>
+                                <span>Investment</span>
+                            </p>
                         </div>
-                        <p class="px-4 p-cnt fs15">{{$v.Summary}}</p>
+                        <p class="px-4 p-cnt fs18 clr2-1">{{$v.Summary}}</p>
                         <div class="d-flex justify-content-center more-btn">
-                            <a href="/view/{{$v.ID}}" class="read-more px-4 py-2 bg-more text-decoration-none">Read more</a>
+                            <a href="/view/{{$v.ID}}" class="read-more fs18 bg-more text-decoration-none">See More</a>
                         </div>
                     </div>
                 </div>
                 {{end}}
             </div>
         </div>
-        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage">More...</a></div>
+        <div class="text-center mt-3">
+            <a class="fs18 clr2 text-decoration-none" href="/daosPage">See More...</a>
+        </div>
     </div>
     {{template "footer.html" .}}
 </body>

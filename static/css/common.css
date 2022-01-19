@@ -22,6 +22,42 @@
 .min-wid267{
 	min-width: 267px;
 }
+.mg-x48{
+    margin: 48px 0;
+}
+.mgtp-1{
+    margin-top: 10px;
+}
+.mgtp-24{
+    margin-top: 24px;
+}
+.mgtp-40{
+    margin-top: 40px;
+}
+.mgtp-80{
+    margin-top: 80px;
+}
+.mgbm-5{
+    margin-bottom: 5px;
+}
+.mgbm-15{
+    margin-bottom: 15px;
+}
+.mgbm-20{
+    margin-bottom: 20px;
+}
+.mgbm-24{
+    margin-bottom: 24px;
+}
+.pd-0{
+    padding: 0;
+}
+.pd-tp-0{
+    padding-top: 0!important;
+}
+.pd-bm-0{
+    padding-bottom: 0!important;
+}
 .pdlt-1{
     padding-left: 3rem;
 }
@@ -31,15 +67,126 @@
 .pdlt-3{
     padding-left: 12px;
 }
+.pdlt-4{
+    padding-left: 24px;
+}
+.pdlt-5{
+    padding-left: 70px;
+}
+.pdrt-1{
+    padding-right: 60px;
+}
+.al-lt{
+    text-align: left;
+}
+.al-rt{
+    text-align: right;
+}
+.al-ct{
+    text-align: center;
+}
 .vt-al-tp{
 	vertical-align: text-top;
+}
+.fx-al-start{
+    align-self: flex-start;
+}
+.fx-al-end{
+    align-self: flex-end;
+}
+.fx-al-ct{
+    align-self: center;
+}
+.clr0{
+    color: #168ED9;
+}
+.clr1{
+    color: #2D3436;
+}
+.clr2{
+    color: #2D2D36;
+}
+.clr2-1{
+    color: rgba(45, 45, 54, 0.8);
+}
+.clr2-2{
+    color: rgba(45, 45, 54, 0.5);
+}
+.clr3{
+    color: #14142B;
+}
+.clr4{
+    color: #1C1C28;
 }
 .clr9{
     color: #999!important;
 }
+.fs14{
+    font-size: 14px;
+}
 .fs15{
-    font-size: 15px!important;
+    font-size: 15px;
+}
+.fs16{
+    font-size: 16px;
+}
+.fs17{
+    font-size: 17px;
+}
+.fs18{
+    font-size: 18px;
 }
 .fs-7{
-    font-size: 0.85rem!important;
+    font-size: 0.85rem;
+}
+.fs20{
+    font-size: 20px;
+}
+.fs22{
+    font-size: 22px;
+}
+.fs24{
+    font-size: 24px;
+}
+.fs28{
+    font-size: 28px;
+}
+.fs30{
+    font-size: 30px;
+}
+.fs32{
+    font-size: 32px;
+}
+.fs600{
+    font-weight: 600;
+}
+.h-line{
+    height: 1px;
+}
+.line-bm{
+    border-bottom: 1px solid rgba(45, 45, 54, 0.15);
+}
+.line-tp{
+    border-top: 1px solid rgba(45, 45, 54, 0.15);
+}
+.divider{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    font-feature-settings: "tnum";
+    background: #2D3436;
+}
+.divider, .divider-vertical{
+    position: relative;
+    top: -.06em;
+    display: inline-block;
+    width: 1px;
+    height: .9em;
+    margin: 0 8px;
+    vertical-align: middle;
 }

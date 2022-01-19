@@ -10,6 +10,7 @@
     <link href="/static/css/front/style.css" rel="stylesheet">
     <link href="/static/css/common.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
 </head>
 <body>
     <div class="top-nav">
@@ -19,7 +20,10 @@
     <div class="dao-list">
         <div class="container">
             {{range $i, $v := .tags}}
-            <a href="/daosPage?tid={{$v.ID}}" class="dao-btn dao-btn-primary rounded-pill text-decoration-none fl"><span class="px-2">{{$v.Name}}</span> <span class="nub px-2">{{$v.UseCount}}</span></a>
+            <a href="/daosPage?tid={{$v.ID}}" data-id="{{$v.ID}}" class="dao-btn rounded-pill text-decoration-none">
+                <span class="fs600">{{$v.Name}}</span>
+                <span class="nub px-2">{{$v.UseCount}}</span>
+            </a>
             {{end}}
         </div>
         <div class="cl"></div>
@@ -32,21 +36,50 @@
                             <div class="dao-img">
                                 <img src="{{$v.Pic}}" alt="">
                             </div>
-                            <h4>{{$v.Title}}</h4>
-                            <p class="clr9">{{$v.Members}} Members</p>
+                            <div class="title clr2 fs24 fs600">{{$v.Title}}</div>
+                            <p class="fs16 clr2 mgtp-1">
+                                <span>{{$v.Members}}</span>
+                                <span class="divider divider-vertical"></span>
+                                <span>Investment</span>
+                            </p>
                         </div>
-                        <p class="px-4 p-cnt fs15">{{$v.Summary}}</p>
+                        <p class="px-4 p-cnt fs18 clr2-1">{{$v.Summary}}</p>
                         <div class="d-flex justify-content-center more-btn">
-                            <a href="/view/{{$v.ID}}" class="read-more px-4 py-2 bg-more text-decoration-none">Read more</a>
+                            <a href="/view/{{$v.ID}}" class="read-more fs18 bg-more text-decoration-none">See More</a>
                         </div>
                     </div>
                 </div>
                 {{end}}
             </div>
         </div>
-        <div class="text-center mt-5"><a class="link-dark text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">More...</a></div>
+        <div class="text-center mt-3">
+            <a class="fs18 clr2 text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">See More...</a>
+        </div>
     </div>
     {{template "footer.html" .}}
 </body>
+<script type="text/javascript">
+// 为标签添加激活样式
+(function() {
+    const href = location.href;
+    const tid = href.indexOf("?tid") > -1 ? href.split("?tid=")[1] : null;
+    const daoBtns = $(".dao-btn");
+    // 默认添加第一个
+    !tid && $(daoBtns[0]).addClass("active");
+
+    if(!!tid) {
+        $(".dao-btn").removeClass("active");
+
+        for(let i = 0, len = daoBtns.length; i < len; i++) {
+            const id = daoBtns[i].dataset.id * 1;
+
+            if(tid * 1 === id) {
+                $(daoBtns[i]).addClass("active");
+                break;
+            }
+        }
+    }
+})()
+</script>
 
 </html>
