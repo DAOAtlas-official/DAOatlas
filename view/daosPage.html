@@ -62,7 +62,16 @@
 // 为标签添加激活样式
 (function() {
     const href = location.href;
-    const tid = href.indexOf("?tid") > -1 ? href.split("?tid=")[1] : null;
+    const query = href.indexOf("?") > -1 ? href.split("?")[1] : null;
+    const queryParam = query.indexOf("&") > -1 ? query.split("&") : query.indexOf("tid") > -1 ? href.split("?tid=")[1] : null;
+    let tid = null;
+    
+    if(Array.isArray(queryParam)) {
+        queryParam.map(item => {
+            if(item.indexOf("tid") > -1) tid = item.split("=")[1];
+        })
+    }else tid  = queryParam;
+    
     const daoBtns = $(".dao-btn");
     // 默认添加第一个
     !tid && $(daoBtns[0]).addClass("active");

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <div class="top-nav pdlt-1">
+    <div class="top-nav">
         {{template "nav.html" .}}
     </div>
     <div>
@@ -22,12 +22,12 @@
     </div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-9 new-px-r">
+            <div class="col-md-9 new-px">
                 <div class="row line-bm nh-title">
-                    <div class="col-md-9 pd-0">
+                    <div class="col-md-9 col-6 pd-0">
                         <div class="fs24 fs600 clr3">New</div>
                     </div>
-                    <div class="col-md-3 pd-0 al-rt nh-t-more">
+                    <div class="col-md-3 col-6 pd-0 al-rt nh-t-more">
                         <a href="/articles" class="clr2-1">
                             <span>More</span>
                             <i class="bi bi-arrow-right"></i>
@@ -42,7 +42,7 @@
                                 <a href="/view/{{(index .newPosts 0 ).ID}}" class="clr3">{{(index .newPosts 0 ).Title}}</a>
                             </div>
                             <div class="fs16 clr2-1 mgbm-20 cnt overflow-hidden">{{(index .newPosts 0 ).Content}}</div>
-                            <div class="fs14 clr2-2 dtime">{{ toTime (index .newPosts 0 ).CreatedAt}}</div>
+                            <div class="fs14 clr2-2 dtime mgbm-20">{{ toTime (index .newPosts 0 ).CreatedAt}}</div>
                         </div>
                         <div class="col-md-8 pd-0 cover-box">
                             <div class="cover-img">
@@ -64,12 +64,12 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 hot-px-l">
+            <div class="col-md-3 hot-px">
                 <div class="row line-bm nh-title">
-                    <div class="col-md-3 pd-0">
+                    <div class="col-md-3 col-6 pd-0">
                         <div class="fs24 fs600 clr3">Hot</div>
                     </div>
-                    <div class="col-md-9 pd-0 al-rt nh-t-more">
+                    <div class="col-md-9 col-6 pd-0 al-rt nh-t-more">
                         <a href="/articles" class="clr2-1">
                             <span>More</span>
                             <i class="bi bi-arrow-right"></i>
