@@ -16,6 +16,7 @@ import (
 
 	"html/template"
 	"time"
+	"regexp"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -32,6 +33,11 @@ func main() {
 		"toTime": func(arg uint) string {
 			return time.Unix(int64(arg), 0).Format("Jan 02")
 		},
+		"toDaoTag": func(arg1 string) string {
+			var re = regexp.MustCompile(`(\d+#)`)
+		 	return re.ReplaceAllString(arg1[1:], ``)
+		},
+
 	})
 	r.NoRoute(con.Not404) //404页面
 	// r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
