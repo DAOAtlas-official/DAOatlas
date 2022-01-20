@@ -487,6 +487,8 @@
                         $.get("/admin/view/" + id, function (res, status) {
                             if (status == 'success' && res.code == 200) {
                                 let post_data = res.data.post_data;
+                                content = post_data.content;
+                                that.daoAttr.content = content;
                                 ue = UE.getEditor('editor');
                                 ue.ready(function () {
                                     //设置编辑器的内容
