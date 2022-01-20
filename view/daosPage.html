@@ -38,14 +38,14 @@
                             </div>
                             <div class="title clr2 fs24 fs600">{{$v.Title}}</div>
                             <p class="fs16 clr2 mgtp-1">
-                                <span>{{$v.Members}}</span>
-                                <span class="divider divider-vertical"></span>
-                                <span>Investment</span>
+                                <span>{{$v.Members}} Members</span>
+                                <!-- <span class="divider divider-vertical"></span>
+                                <span>Investment</span> -->
                             </p>
                         </div>
                         <p class="px-4 p-cnt fs18 clr2-1">{{$v.Summary}}</p>
                         <div class="d-flex justify-content-center more-btn">
-                            <a href="/view/{{$v.ID}}" class="read-more fs18 bg-more text-decoration-none">See More</a>
+                            <a href="/view/{{$v.ID}}" class="read-more fs18 bg-more text-decoration-none">More</a>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="text-center mt-3">
-            <a class="fs18 clr2 text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">See More...</a>
+            <a class="fs18 clr2 text-decoration-none" href="/daosPage?page={{.page}}&tid={{.tid}}">More...</a>
         </div>
     </div>
     {{template "footer.html" .}}
