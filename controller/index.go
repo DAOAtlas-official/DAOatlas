@@ -160,7 +160,7 @@ func Index(c *gin.Context) {
 	}()
 	// 最新
 	go func() {
-		newPosts = util.Imgsrc(server.GetViewlist("-33", 1, 3)) //最新
+		newPosts = util.Imgsrc(server.GetViewlist("-33", 1, 4)) //最新
 		wg.Done()
 	}()
 	// 标签

@@ -14,6 +14,9 @@ import (
 	"goblog/middleware"
 	"goblog/util"
 
+	"html/template"
+	"time"
+
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
@@ -25,6 +28,11 @@ func main() {
 	cfg := config.Configv
 	gin.SetMode(cfg.GetString("env")) // debug | release
 	r := gin.Default()
+	r.SetFuncMap(template.FuncMap{
+		"toTime": func(arg uint) string {
+			return time.Unix(int64(arg), 0).Format("Jan 02")
+		},
+	})
 	r.NoRoute(con.Not404) //404页面
 	// r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
 	rootPath := cfg.GetString("root_path")

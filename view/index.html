@@ -28,7 +28,7 @@
                         <div class="fs24 fs600 clr3">New</div>
                     </div>
                     <div class="col-md-3 pd-0 al-rt nh-t-more">
-                        <a href="" class="clr2-1">
+                        <a href="/articles" class="clr2-1">
                             <span>Read More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -39,61 +39,30 @@
                     <div class="row new-cnt-top">
                         <div class="col-md-4 pd-0">
                             <div class="fs30 fs600 mgbm-15 title">
-                                <a href="" class="clr3">Silicon Valley has no idea about the ‘metaverse’</a>
+                                <a href="/view/{{(index .newPosts 0 ).ID}}" class="clr3">{{(index .newPosts 0 ).Title}}</a>
                             </div>
-                            <div class="fs16 clr2-1 mgbm-20 cnt overflow-hidden">Silicon Valley denizens are making the rounds bloviating on their ideas about the ‘metaverse’ which basically are nonsense vehicles for selling more eyeballs…</div>
-                            <div class="fs14 clr2-2 dtime">NOV 12 · 4 min read</div>
+                            <div class="fs16 clr2-1 mgbm-20 cnt overflow-hidden">{{(index .newPosts 0 ).Content}}</div>
+                            <div class="fs14 clr2-2 dtime">{{ toTime (index .newPosts 0 ).CreatedAt}}</div>
                         </div>
                         <div class="col-md-8 pd-0 cover-box">
                             <div class="cover-img">
-                                <img src="/static/upload/images/20220103/123.png" alt="" class="img-fluid banner-img" />
+                                <img src="{{(index .newPosts 0 ).Pic}}" alt="" class="img-fluid banner-img" />
                             </div>
                         </div>
                     </div>
                     <div class="new-cnt-btm">
+                        {{range $i, $v := .newPosts}}
+                        {{if gt $i  0}}
                         <div class="new-block line-tp">
                             <div class="fs20 fs600 mgbm-20 title overflow-hidden">
-                                <a href="" class="clr2">How to provide liquidity to the Bankless 80/20 Pool</a>
+                                <a href="/view/{{$v.ID}}" class="clr2">{{$v.Title}}</a>
                             </div>
-                            <div class="fs14 clr2-2 dtime">OCT 25 · 4 min read</div>
+                            <div class="fs14 clr2-2 dtime">{{ toTime $v.CreatedAt}}</div>
                         </div>
-                        <div class="new-block line-tp">
-                            <div class="fs20 fs600 clr2 mgbm-20 title overflow-hidden">
-                                <a href="" class="clr2">What can we do with a DAO in 2021?</a>
-                            </div>
-                            <div class="fs14 clr2-2 dtime">OCT 18 · 4 min read</div>
-                        </div>
-                        <div class="new-block line-tp">
-                            <div class="fs20 fs600 mgbm-20 title overflow-hidden">
-                                <a href="" class="clr2">What is a DAO exactly?</a>
-                            </div>
-                            <div class="fs14 clr2-2 dtime">OCT 12 · 4 min read </div>
-                        </div>
+                        {{end}}
+                        {{end}}
                     </div>
                 </div>
-
-                <!-- <a class="text-white  text-decoration-none" href="/view/{{(index .newPosts 0 ).ID}}">
-                    <div class="p-4 news-card-1" style="background-image: url('/static/upload/images/20220103/123.png')">
-                        <h5 class="card-title">{{(index .newPosts 0 ).Title}}</h5>
-                        !-- <small>3 min read</small> --
-                        <h2 class="mt-4">New Post Today.</h2>
-                    </div>
-                </a>
-                <table class="table table-hover mt-3">
-                    <tbody>
-                        {{range $i, $v := .newPosts}}
-                        <tr>
-                            !-- <td class="py-3">{{$v.ID}}</td> --
-                            !-- <td class="py-3"></td> --
-                            <td class="py-3"><a class="text-dark text-decoration-none" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            !-- <td class="py-3 text-muted"><small>4 min read</small></td> --
-                        </tr>
-                        {{end}}
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
-                    <a href="/articles" class="read-more px-2 py-1 f12 text-decoration-none">Read more</a>
-                </div> -->
             </div>
             <div class="col-md-3 hot-px-l">
                 <div class="row line-bm nh-title">
@@ -101,7 +70,7 @@
                         <div class="fs24 fs600 clr3">Hot</div>
                     </div>
                     <div class="col-md-9 pd-0 al-rt nh-t-more">
-                        <a href="" class="clr2-1">
+                        <a href="/articles" class="clr2-1">
                             <span>Read More</span>
                             <i class="bi bi-arrow-right"></i>
                         </a>
@@ -111,49 +80,24 @@
                 <div class="hot-cnt">
                     <div class="hot-block">
                         <div class="cover-img">
-                            <img src="/static/upload/images/20220103/456.jpeg" alt="" class="img-fluid banner-img" />
+                            <img src="{{(index .hotPosts 0 ).Pic}}" alt="" class="img-fluid banner-img" />
                         </div>
                         <div class="fs20 fs600 mgbm-20 title overflow-hidden">
-                            <a href="" class="clr2">How to provide liquidity to the Bankless 80/20 Pool</a>
+                            <a href="/view/{{(index .hotPosts 0 ).ID}}" class="clr2">{{(index .hotPosts 0 ).Title}}</a>
                         </div>
-                        <div class="fs14 clr2-2 dtime">OCT 25 · 4 min read</div>
+                        <div class="fs14 clr2-2 dtime">{{ toTime (index .hotPosts 0 ).CreatedAt}}</div>
                     </div>
+                    {{range $i, $v := .hotPosts}}
+                        {{if gt $i  0}}
                     <div class="hot-block">
                         <div class="fs20 fs600 mgbm-20 title overflow-hidden">
-                            <a href="" class="clr2">What can we do with a DAO in 2021?</a>
+                            <a href="/view/{{$v.ID}}" class="clr2">{{$v.Title}}</a>
                         </div>
-                        <div class="fs14 clr2-2 dtime">OCT 18 · 4 min read</div>
+                        <div class="fs14 clr2-2 dtime">{{ toTime $v.CreatedAt}}</div>
                     </div>
-                    <div class="hot-block">
-                        <div class="fs20 fs600 mgbm-20 title overflow-hidden">
-                            <a href="" class="clr2">What is a DAO exactly?</a>
-                        </div>
-                        <div class="fs14 clr2-2 dtime">OCT 12 · 4 min read </div>
-                    </div>
+                    {{end}}
+                    {{end}}
                 </div>
-
-                <!-- <a class="text-white  text-decoration-none" href="/view/{{(index .hotPosts 0 ).ID}}">
-                        <div class="p-4 news-card-2" style="background-image: url('/static/upload/images/20220103/456.jpeg')">
-                            <h5 class="card-title">{{(index .hotPosts 0 ).Title}}</h5>
-                            !-- <small>4 min read</small> --
-                            <h2 class="mt-4">Hot Post Today.</h2>
-                        </div>
-                    
-                </a>
-                <table class="table table-hover mt-3">
-                    <tbody>
-                        {{range $i, $v := .hotPosts}}
-                        <tr>
-                            !-- <td class="py-3">{{$v.ID}}</td> --
-                            <td class="py-3"><a rel="bookmark" class="text-dark text-decoration-none" title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a> </td>
-                            !-- <td class="py-3 text-muted"><small>4 min read</small></td> --
-                        </tr>
-                        {{end}}
-                    </tbody>
-                </table>
-                <div class="d-flex justify-content-center">
-                    <a href="/daosPage" class="read-more px-2 py-1 text-decoration-none f12">Read more</a>
-                </div> -->
             </div>
         </div>
     </div>
