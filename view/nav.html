@@ -8,12 +8,12 @@
         </a>
         <!-- <ul class="nav nav-ul"> -->
         <ul class="nav">
-            <li class="nav-item"><a href="/" class="nav-link {{if eq .tab "home"}}active {{end}}py-4">Home</a></li>
-            <li class="nav-item"><a href="/daosPage" class="nav-link {{if eq .tab "daoPost"}}active {{end}}py-4">DAOs</a></li>
-            <li class="nav-item"><a href="/articles" class="nav-link {{if eq .tab "articles"}}active {{end}}py-4">Articles</a></li>
-            <li class="nav-item"><a href="/events" class="nav-link {{if eq .tab "events"}}active {{end}}py-4">Events</a></li>
-            <li class="nav-item"><a href="/jobs" class="nav-link {{if eq .tab "jobs"}}active {{end}}py-4">DAO Jobs</a></li>
-            <li class="nav-item"><a href="/about" id="aboutA" class="nav-link {{if eq .tab "about"}}active {{end}}py-4">About</a></li>                
+            <li class="nav-item"><a href="/" class="nav-link nav-m {{if eq .tab "home"}}active {{end}}py-4">Home</a></li>
+            <li class="nav-item"><a href="/daosPage" class="nav-link nav-m {{if eq .tab "daoPost"}}active {{end}}py-4">DAOs</a></li>
+            <li class="nav-item"><a href="/articles" class="nav-link nav-m {{if eq .tab "articles"}}active {{end}}py-4">Articles</a></li>
+            <li class="nav-item"><a href="/events" class="nav-link nav-m {{if eq .tab "events"}}active {{end}}py-4">Events</a></li>
+            <li class="nav-item"><a href="/jobs" class="nav-link nav-m {{if eq .tab "jobs"}}active {{end}}py-4">DAO Jobs</a></li>
+            <li class="nav-item"><a href="/about" id="aboutA" class="nav-link nav-m {{if eq .tab "about"}}active {{end}}py-4">About</a></li>                
         </ul>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8C8RSV22SC"></script>
@@ -29,7 +29,7 @@
     <script type="text/javascript">
         // 仅解决About时无下划线
         (function() {
-            const classStr = "nav-link py-4";
+            const classStr = "nav-link nav-m py-4";
             const regAbout = /\/about{1}$/; // 路由匹配 /about 1次, 且以 /about 结尾
             const href = location.href;
             
