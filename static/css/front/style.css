@@ -172,6 +172,7 @@
 }
 .hot-cnt .hot-block:last-child{
     border-bottom: none;
+    margin-bottom: 0;
 }
 .hot-cnt .hot-block .cover-img{
     /*max-height: 172px;*/
@@ -297,6 +298,24 @@
 }
 
 @media(max-width: 676px) {
+    .fs32{
+        font-size: 24px!important;
+    }
+    .fs30{
+        font-size: 22px!important;
+    }
+    .fs28{
+        font-size: 20px!important;
+    }
+    .fs16{
+        font-size: 14px!important;
+    }
+    .mt-5{
+        margin-top: 1rem!important;
+    }
+    .mb-3{
+        margin-bottom: 10px!important;
+    }
     .logo-pos{
         margin-bottom: 0!important;
     }
@@ -308,5 +327,65 @@
     }
     .dao-btn{
         margin: 7px 5px;
+    }
+    .dao-list, .footer, .page{
+        padding: 1rem 0;
+    }
+    .dao-card{
+        padding: 25px 7px 24px;
+        height: 418px;
+    }
+    .dao-img{
+        margin: 0 auto 16px;
+    }
+    .dao-head{
+        margin-bottom: 30px!important;
+    }
+    .more-btn{
+        bottom: 20px;
+    }
+    .dao-detail-cnt-m, .dao-detail-head-m{
+        padding: 1.5rem!important;
+    }
+    .footer-copy{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .dao-head .mgtp-40{
+        margin-top: 12px;
+    }
+    .dao-head .pdlt-4{
+        padding-left: 0;
+    }
+    .sub-nav{
+        padding: 5px 0;
+        margin-right: 14px;
+        margin-bottom: 10px;
+    }
+    .nav-m{
+        padding-left: 15px;
+    }
+
+    .art-a, .art-a:hover{
+        display: block;
+        margin: 0 12px;
+    }
+    .art-pd{
+        padding: 16px 22px;
+    }
+    .article-cover{
+        text-align: center;
+    }
+    .art-dtime{
+        position: relative!important;
+        margin-bottom: 10px!important;
+    }
+    .art-dtl-pd{
+        padding: 16px 22px;
+        margin: 0 12px;
+    }
+    .art-dtl-pd p{
+        margin-bottom: 12px;
+        line-height: 22px;
     }
 }
