@@ -404,4 +404,15 @@
         margin-bottom: 12px;
         line-height: 22px;
     }
+    .about-m{
+        padding: 1.5rem!important;
+        margin: 0 12px!important;
+    }
+    .mirror-bg{
+        width: 30px;
+        height: 30px;
+    }
+    .mirror-bg:hover{
+        background-position: 0 -30px;
+    }
 }
