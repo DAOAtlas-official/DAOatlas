@@ -212,7 +212,7 @@
     text-decoration: none;
 }
 .art-p-cnt{
-    max-height: 100px;
+    /*max-height: 100px;*/
     line-height: 25px;
 }
 
@@ -336,7 +336,7 @@
         margin-bottom: 0!important;
     }
     .nav-m{
-        padding: 10px!important;
+        padding: 10px 6px!important;
     }
     .new-cnt .cover-box{
         padding-left: 0;

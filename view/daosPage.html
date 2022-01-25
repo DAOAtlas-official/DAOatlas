@@ -63,7 +63,7 @@
 (function() {
     const href = location.href;
     const query = href.indexOf("?") > -1 ? href.split("?")[1] : null;
-    const queryParam = query.indexOf("&") > -1 ? query.split("&") : query.indexOf("tid") > -1 ? href.split("?tid=")[1] : null;
+    const queryParam = !query ? null : query.indexOf("&") > -1 ? query.split("&") : query.indexOf("tid") > -1 ? href.split("?tid=")[1] : null;
     let tid = null;
     
     if(Array.isArray(queryParam)) {
